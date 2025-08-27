@@ -147,3 +147,15 @@ vite.config.ts.timestamp-*
 
 # Arquivos temporários
 *.sqlite
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Pastas de build
+bin/
+obj/
+
+# Arquivos de backup
+*- Backup.*
