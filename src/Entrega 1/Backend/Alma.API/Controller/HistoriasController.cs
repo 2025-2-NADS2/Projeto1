@@ -1,6 +1,6 @@
 ﻿namespace Alma.API.Controller
 {
-    public class HistoriasController
+    public class HistoriasDto
     {
     }
 }

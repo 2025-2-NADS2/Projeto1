@@ -1,6 +1,6 @@
 ﻿namespace Alma.API.Controller
 {
-    public class CampanhaService
+    public class ICampanhaService
     {
     }
 }

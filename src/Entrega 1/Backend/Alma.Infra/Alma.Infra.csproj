@@ -11,4 +11,9 @@
     <ProjectReference Include="..\Alma.Domain\Alma.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
 </Project>
