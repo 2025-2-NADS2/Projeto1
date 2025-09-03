@@ -1,19 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Alma.Application\Alma.Application.csproj" />
-    <ProjectReference Include="..\Alma.Domain\Alma.Domain.csproj" />
+	<ItemGroup>
+		<Compile Remove="Repositories\**" />
+		<EmbeddedResource Remove="Repositories\**" />
+		<None Remove="Repositories\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Alma.Application\Alma.Application.csproj" />
+		<ProjectReference Include="..\Alma.Domain\Alma.Domain.csproj" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0" />
+	    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="Repositories\" />
-  </ItemGroup>
+</ItemGroup>
 
 </Project>

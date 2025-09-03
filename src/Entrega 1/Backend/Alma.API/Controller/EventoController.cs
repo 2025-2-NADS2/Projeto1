@@ -1,6 +1,6 @@
 ﻿namespace Alma.API.Controller
 {
-    public class EventoDto
+    public class EventoController
     {
     }
 }

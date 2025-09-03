@@ -1,16 +1,22 @@
+using Alma.Infra.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// ? Adiciona o DbContext com SQLite
+builder.Services.AddDbContext<AlmaDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// ? Adiciona suporte a Razor Pages (se for necessário)
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// ? Configura o pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    app.UseHsts(); // HTTP Strict Transport Security
 }
 
 app.UseHttpsRedirection();
