@@ -1,19 +1,23 @@
-﻿using Alma.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Alma.Domain.Entities;
+using Alma.API.Controller;
+
 namespace Alma.Infra.Data
 {
     public class AlmaDbContext : DbContext
     {
         public AlmaDbContext(DbContextOptions<AlmaDbContext> options) : base(options) { }
 
-        // Adicione seus DbSets
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Campanha> Campanhas { get; set; }
+        public DbSet<Evento> Eventos { get; set; }
+        public DbSet<Historias> Historias { get; set; }
+        public DbSet<Inscricoes> Inscricoes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            // Configurações de entidades se necessário
+            // Aqui você pode usar Fluent API para configurações específicas
         }
     }
 }

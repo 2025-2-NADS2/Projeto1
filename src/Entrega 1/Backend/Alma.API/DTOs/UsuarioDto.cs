@@ -1,4 +1,4 @@
-﻿namespace Alma.API.Controller
+﻿namespace Alma.API.DTOs
 {
     public class UsuarioDto
     {

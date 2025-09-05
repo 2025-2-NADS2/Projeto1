@@ -1,6 +1,6 @@
-﻿namespace Alma.API.Controller
+﻿namespace Alma.API.DTOs
 {
-    public class VoluntarioController
+    public class InscricoesDto
     {
     }
 }

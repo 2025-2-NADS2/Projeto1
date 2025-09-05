@@ -1,31 +1,24 @@
 using Alma.Infra.Data;
+using Alma.Infra.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Alma.Application.Interfaces.Repositorios;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ? Adiciona o DbContext com SQLite
+// Configurar DbContext com SQLite
 builder.Services.AddDbContext<AlmaDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// ? Adiciona suporte a Razor Pages (se for necessário)
-builder.Services.AddRazorPages();
+// Injetar repositórios
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IEventoRepository, EventoRepository>();
+builder.Services.AddScoped<ICampanhaRepository, CampanhaRepository>();
+builder.Services.AddScoped<IHistoriasRepository, HistoriasRepository>();
+builder.Services.AddScoped<IInscricoesRepository, InscricoesRepository>();
+
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// ? Configura o pipeline
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-    app.UseHsts(); // HTTP Strict Transport Security
-}
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapRazorPages();
-
+app.MapControllers();
 app.Run();

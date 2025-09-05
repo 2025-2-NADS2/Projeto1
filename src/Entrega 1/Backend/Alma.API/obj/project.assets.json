@@ -1159,7 +1159,7 @@
         "dependencies": {
           "Alma.Application": "1.0.0",
           "Alma.Domain": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "8.0.0",
+          "Microsoft.EntityFrameworkCore": "9.0.8",
           "Microsoft.EntityFrameworkCore.Design": "8.0.0",
           "Microsoft.EntityFrameworkCore.Sqlite": "8.0.0"
         },

@@ -1,5 +1,4 @@
 ﻿
-
 using Alma.Domain.Enum;
 
 namespace Alma.Domain.Entities

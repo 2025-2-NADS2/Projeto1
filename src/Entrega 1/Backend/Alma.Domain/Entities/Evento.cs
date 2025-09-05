@@ -1,6 +1,6 @@
 ﻿using Alma.Domain.Enum;
 
-namespace Alma.API.Controller
+namespace Alma.Domain.Entities
 {
     public class Evento
     {

@@ -1,4 +1,4 @@
-﻿namespace Alma.API.Controller
+﻿namespace Alma.Domain.Entities
 {
     public class Inscricoes
     {

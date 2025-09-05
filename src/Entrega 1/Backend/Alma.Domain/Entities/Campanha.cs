@@ -1,7 +1,7 @@
 ﻿using Alma.Domain.Enum;
 using System.Net.NetworkInformation;
 
-namespace Alma.API.Controller
+namespace Alma.Domain.Entities
 {
     public class Campanha
     {

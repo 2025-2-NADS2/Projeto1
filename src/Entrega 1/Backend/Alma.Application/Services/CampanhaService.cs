@@ -1,4 +1,4 @@
-﻿namespace Alma.API.Controller
+﻿namespace Alma.Application.Services
 {
     public class CampanhaService
     {
