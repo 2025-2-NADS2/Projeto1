@@ -1146,6 +1146,10 @@
       "Alma.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "9.0.8",
+          "Microsoft.EntityFrameworkCore.Sqlite": "9.0.8"
+        },
         "compile": {
           "bin/placeholder/Alma.Domain.dll": {}
         },
@@ -1161,7 +1165,7 @@
           "Alma.Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "9.0.8",
           "Microsoft.EntityFrameworkCore.Design": "8.0.0",
-          "Microsoft.EntityFrameworkCore.Sqlite": "8.0.0"
+          "Microsoft.EntityFrameworkCore.Sqlite": "9.0.8"
         },
         "compile": {
           "bin/placeholder/Alma.Infra.dll": {}

@@ -1,4 +1,4 @@
-﻿namespace Alma.API.DTOs
+﻿namespace Alma.Domain.DTOs
 {
     public class InscricoesDto
     {

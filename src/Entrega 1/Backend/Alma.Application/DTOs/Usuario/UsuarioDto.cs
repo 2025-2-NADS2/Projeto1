@@ -1,4 +1,4 @@
-﻿namespace Alma.API.DTOs
+﻿namespace Alma.Domain.DTOs.Usuario
 {
     public class UsuarioDto
     {

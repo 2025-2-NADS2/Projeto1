@@ -1,6 +1,6 @@
 ﻿namespace Alma.Application.Interfaces.Repositorios
 {
-    public class IHistoriasService
+    public interface IHistoriasService
     {
     }
 }

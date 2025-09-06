@@ -1,5 +1,4 @@
-﻿using Alma.Domain.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Alma.Application.Interfaces.Repositorios
 {
-    public interface IUsuarioRepository
+    public interface IUnitOfWork
     {
-        Task PostUsuario(Usuario model);
-        Task<List<Usuario>> GetUsuarios();
+        Task CommitAsync();
     }
 }

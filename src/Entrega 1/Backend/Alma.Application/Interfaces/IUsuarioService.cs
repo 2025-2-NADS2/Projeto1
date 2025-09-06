@@ -1,6 +1,9 @@
-﻿namespace Alma.Application.Interfaces.Repositorios
+﻿using Alma.Domain.DTOs.Usuario;
+
+namespace Alma.Application.Interfaces.Repositorios
 {
-    public class IUsuarioService
+    public interface IUsuarioService
     {
+        Task<Guid> CriarUsuario(NovoUsuarioDto dto);
     }
 }

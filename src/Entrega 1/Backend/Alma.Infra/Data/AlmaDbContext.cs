@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Alma.Domain.Entities;
-using Alma.API.Controller;
-
 namespace Alma.Infra.Data
 {
     public class AlmaDbContext : DbContext
