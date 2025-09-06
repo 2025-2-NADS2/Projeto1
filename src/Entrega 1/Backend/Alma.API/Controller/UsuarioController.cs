@@ -14,7 +14,7 @@ namespace Alma.API.Controller
         {
             _usuarioService = usuarioService;
         }
-        [HttpPost("post/criarusuario")]
+        [HttpPost("post/criar/usuario")]
         public async Task<IActionResult> CriarUsuario([FromBody] NovoUsuarioDto dto)
         {
             try
