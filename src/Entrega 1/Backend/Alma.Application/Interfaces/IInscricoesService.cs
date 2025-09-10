@@ -2,5 +2,6 @@
 {
     public interface IInscricoesService
     {
+        Task<Guid> InscreverEvento(Guid eventoId, Guid userId);
     }
 }

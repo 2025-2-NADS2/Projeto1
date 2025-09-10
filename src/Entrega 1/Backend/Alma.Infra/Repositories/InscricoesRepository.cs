@@ -11,6 +11,13 @@ namespace Alma.Infra.Repositories
 {
     public class InscricoesRepository : BaseRepository<Inscricoes>, IInscricoesRepository
     {
+        private readonly AlmaDbContext _context;
         public InscricoesRepository(AlmaDbContext context) : base(context) { }
+
+        public async Task PostInscricao(Inscricoes inscricao)
+        {
+            await _context.Inscricoes.AddAsync(inscricao);
+        }
     }
 }
+

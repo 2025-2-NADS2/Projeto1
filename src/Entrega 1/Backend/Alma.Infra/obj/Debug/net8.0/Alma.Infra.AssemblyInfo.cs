@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Alma.Infra")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0760d193e7da25d2d5a967430a6c00d871823252")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Alma.Infra")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Alma.Infra")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

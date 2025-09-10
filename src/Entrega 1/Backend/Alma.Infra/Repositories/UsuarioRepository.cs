@@ -12,11 +12,16 @@ namespace Alma.Infra.Repositories
 
         public async Task PostUsuario(Usuario usuario)
         {
-            await _context.Usuarios.AddAsync(usuario);
+            _context.Usuarios.Add(usuario);
         }
         public async Task<List<Usuario>> GetUsuarios()
         {
             return await _context.Usuarios.ToListAsync();
+        }
+
+        public async Task<Usuario> GetUsuarioByEmail(string email)
+        {
+            return await _context.Usuarios.FirstOrDefaultAsync(x => x.Email.Equals(email));
         }
     }
 }

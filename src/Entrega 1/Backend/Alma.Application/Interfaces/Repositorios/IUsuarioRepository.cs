@@ -1,9 +1,4 @@
 ﻿using Alma.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Alma.Application.Interfaces.Repositorios
 {
@@ -11,5 +6,6 @@ namespace Alma.Application.Interfaces.Repositorios
     {
         Task PostUsuario(Usuario model);
         Task<List<Usuario>> GetUsuarios();
+        Task<Usuario> GetUsuarioByEmail(string email);
     }
 }
