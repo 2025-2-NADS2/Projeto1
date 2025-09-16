@@ -1,5 +1,7 @@
-﻿using Alma.Application.Interfaces.Repositorios;
+﻿using Alma.Application.DTOs.Evento;
+using Alma.Application.Interfaces.Repositorios;
 using Alma.Application.Services;
+using Alma.Domain.DTOs.Usuario;
 using Alma.Domain.Entities;
 using Alma.Infra.Data;
 using Alma.Infra.Repositories;
@@ -21,7 +23,7 @@ namespace Alma.API.Controller
             _eventoService = eventoService;
         }
 
-        [HttpGet("get/eventos/")]
+        [HttpGet("get/eventos")]
         public async Task<ActionResult<List<Evento>>> GetTodosEventosDisponiveis()
         {
             try
@@ -32,6 +34,33 @@ namespace Alma.API.Controller
             catch (Exception ex)
             {
                 return StatusCode(500, $"Erro interno ao buscar eventos: {ex.Message}");
+            }
+        }
+
+        [HttpPost("post/novo/evento")]
+        public async Task<IActionResult> CriarNovoEvento([FromBody] NovoEventoDto dto)
+        {
+            try
+            {
+                await _eventoService.CriarNovoEvento(dto);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensagem = "Erro interno no servidor.", detalhe = ex.Message });
+            }
+        }
+        [HttpPut("put/update/evento")]
+        public async Task<IActionResult> AtualizaEvento([FromBody] NovoEventoDto dto)
+        {
+            try
+            {
+                await _eventoService.UpdateEvento(dto);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensagem = "Erro interno no servidor.", detalhe = ex.Message });
             }
         }
     }

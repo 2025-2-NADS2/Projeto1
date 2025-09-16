@@ -1,4 +1,5 @@
-﻿using Alma.Domain.Entities;
+﻿using Alma.Application.DTOs.Evento;
+using Alma.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,8 @@ namespace Alma.Application.Interfaces.Repositorios
     public interface IEventoRepository
     {
         Task<List<Evento>> GetAllEventosDisponiveis();
+        Task<List<Evento>> GetEventos();
+        Task PostEvento(Evento evento);
+        Task UpdateEvento(Evento evento);
     }
 }

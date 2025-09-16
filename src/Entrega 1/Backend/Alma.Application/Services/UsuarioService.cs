@@ -49,5 +49,35 @@ namespace Alma.Application.Services
 
             return usuario; // deixa a API decidir como gerar o token
         }
+
+        public async Task UpdateUsuario(NovoUsuarioDto dto)
+        {
+            if (string.IsNullOrWhiteSpace(dto.Nome) || string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Senha))
+                throw new ArgumentException("Nome, Email e Senha são obrigatórios.");
+
+            var existeUsuario = await _usuarioRepository.GetUsuarios();
+
+            if (existeUsuario.Any(x => x.Email == dto.Email))
+                throw new InvalidOperationException("Já existe um usuário com esse e-mail.");
+
+            var usuario = new Usuario
+            {
+                Name = dto.Nome,
+                Email = dto.Email,
+                Senha = BCrypt.Net.BCrypt.HashPassword(dto.Senha),
+                DateCreted = DateTime.Now,
+            };
+
+            _usuarioRepository.UpdateUsuario(usuario);
+            await _unitOfWork.CommitAsync();
+
+        }
+        public async Task DeleteUsuario(Guid id)
+        {
+            var usuario = await _usuarioRepository.GetUsuarioById(id);
+            await _usuarioRepository.DeleteUsuarioByUser(usuario);
+            await _unitOfWork.CommitAsync();
+
+        }
     }
 }

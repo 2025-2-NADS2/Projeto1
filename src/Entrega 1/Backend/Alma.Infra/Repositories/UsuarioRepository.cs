@@ -23,5 +23,20 @@ namespace Alma.Infra.Repositories
         {
             return await _context.Usuarios.FirstOrDefaultAsync(x => x.Email.Equals(email));
         }
+
+        public async Task UpdateUsuario(Usuario usuario)
+        {
+            _context.Usuarios.Update(usuario);
+        }
+        public async Task DeleteUsuarioByUser(Usuario usuario)
+        {
+            _context.Usuarios.Remove(usuario);
+        }
+        
+        public async Task<Usuario> GetUsuarioById(Guid id)
+        {
+            return await _context.Usuarios.FirstOrDefaultAsync(x => x.Id.Equals(id));
+        }
+
     }
 }

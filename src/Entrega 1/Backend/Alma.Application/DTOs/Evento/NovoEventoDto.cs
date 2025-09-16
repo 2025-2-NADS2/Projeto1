@@ -1,8 +1,7 @@
 ﻿using Alma.Domain.Enum;
-
-namespace Alma.Domain.Entities
+namespace Alma.Application.DTOs.Evento
 {
-    public class Evento
+    public class NovoEventoDto
     {
         public Guid Id { get; set; }
         public string Titulo { get; set; }

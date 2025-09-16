@@ -1,4 +1,5 @@
 ﻿using Alma.API.Auth;
+using Alma.Application.DTOs.Evento;
 using Alma.Application.DTOs.Usuario;
 using Alma.Application.Interfaces.Repositorios;
 using Alma.Application.Services;
@@ -46,6 +47,34 @@ namespace Alma.API.Controller
             catch (Exception ex)
             {
                 return Unauthorized(ex.Message);
+            }
+        }
+
+        [HttpPut("put/update/usuario")]
+        public async Task<IActionResult> AtualizaUsuario([FromBody] NovoUsuarioDto dto)
+        {
+            try
+            {
+                await _usuarioService.UpdateUsuario(dto);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensagem = "Erro interno no servidor.", detalhe = ex.Message });
+            }
+        }
+
+        [HttpDelete("delete/usuario/{id: Guid}")]
+        public async Task<IActionResult> DeleteUsuario(Guid id)
+        {
+            try
+            {
+                await _usuarioService.DeleteUsuario(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensagem = "Erro interno no servidor.", detalhe = ex.Message });
             }
         }
     }

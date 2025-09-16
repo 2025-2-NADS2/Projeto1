@@ -17,5 +17,20 @@ namespace Alma.Infra.Repositories
             .Where(e => e.Date > DateTime.Now)
             .ToListAsync();
         }
+        public async Task<List<Evento>> GetEventos()
+        {
+            return await _context.Eventos
+            .ToListAsync();
+        }
+
+        public async Task PostEvento(Evento evento)
+        {
+            _context.Eventos.Add(evento);
+        }
+
+        public async Task UpdateEvento(Evento evento)
+        {
+            _context.Eventos.Update(evento);
+        }
     }
 }

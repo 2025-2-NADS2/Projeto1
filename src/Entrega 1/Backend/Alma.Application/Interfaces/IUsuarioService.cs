@@ -7,5 +7,7 @@ namespace Alma.Application.Interfaces.Repositorios
     {
         Task<Guid> CriarUsuario(NovoUsuarioDto dto);
         Task<Usuario> LoginUsuario(string email, string senha);
+        Task UpdateUsuario(NovoUsuarioDto dto);
+        Task DeleteUsuario(Guid id);
     }
 }
