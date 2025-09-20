@@ -18,7 +18,7 @@ namespace Alma.API.Controller
             _inscricoesService = inscricoesService;
         }
 
-        [HttpPost("inscrever/{eventoId}")]
+        [HttpPost("inscrever/{eventoId:guid}")]
         public async Task<IActionResult> InscreverEvento(Guid eventoId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -28,8 +28,6 @@ namespace Alma.API.Controller
             var id = await _inscricoesService.InscreverEvento(eventoId, Guid.Parse(userId));
             return Ok(id);
         }
-
-
     }
 }
 

@@ -64,7 +64,7 @@ namespace Alma.API.Controller
             }
         }
 
-        [HttpDelete("delete/usuario/{id: Guid}")]
+        [HttpDelete("delete/usuario/{id:guid}")] //Guid alterado para guid
         public async Task<IActionResult> DeleteUsuario(Guid id)
         {
             try

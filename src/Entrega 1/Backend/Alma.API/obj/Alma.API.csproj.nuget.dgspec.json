@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.API\\Alma.API.csproj": {}
+    "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.API\\Alma.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.API\\Alma.API.csproj": {
+    "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.API\\Alma.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.API\\Alma.API.csproj",
+        "projectUniqueName": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.API\\Alma.API.csproj",
         "projectName": "Alma.API",
-        "projectPath": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.API\\Alma.API.csproj",
-        "packagesPath": "C:\\Users\\25027686\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.API\\obj\\",
+        "projectPath": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.API\\Alma.API.csproj",
+        "packagesPath": "C:\\Users\\nelso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\25027686\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nelso\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,17 +26,18 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\Alma.Application.csproj": {
-                "projectPath": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\Alma.Application.csproj"
+              "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\Alma.Application.csproj": {
+                "projectPath": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\Alma.Application.csproj"
               },
-              "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Infra\\Alma.Infra.csproj": {
-                "projectPath": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Infra\\Alma.Infra.csproj"
+              "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Infra\\Alma.Infra.csproj": {
+                "projectPath": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Infra\\Alma.Infra.csproj"
               }
             }
           }
@@ -45,7 +46,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -55,6 +62,10 @@
               "target": "Package",
               "version": "[4.0.3, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.*, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.9, )"
@@ -62,10 +73,6 @@
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
-              "target": "Package",
-              "version": "[9.0.9, )"
-            },
-            "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[9.0.9, )"
             },
@@ -97,24 +104,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\Alma.Application.csproj": {
+    "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\Alma.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\Alma.Application.csproj",
+        "projectUniqueName": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\Alma.Application.csproj",
         "projectName": "Alma.Application",
-        "projectPath": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\Alma.Application.csproj",
-        "packagesPath": "C:\\Users\\25027686\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\obj\\",
+        "projectPath": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\Alma.Application.csproj",
+        "packagesPath": "C:\\Users\\nelso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\25027686\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nelso\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -123,14 +130,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Domain\\Alma.Domain.csproj": {
-                "projectPath": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Domain\\Alma.Domain.csproj"
+              "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Domain\\Alma.Domain.csproj": {
+                "projectPath": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Domain\\Alma.Domain.csproj"
               }
             }
           }
@@ -139,7 +147,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -148,6 +162,10 @@
             "BCrypt.Net-Next": {
               "target": "Package",
               "version": "[4.0.3, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.20, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -182,24 +200,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Domain\\Alma.Domain.csproj": {
+    "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Domain\\Alma.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Domain\\Alma.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Domain\\Alma.Domain.csproj",
         "projectName": "Alma.Domain",
-        "projectPath": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Domain\\Alma.Domain.csproj",
-        "packagesPath": "C:\\Users\\25027686\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Domain\\obj\\",
+        "projectPath": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Domain\\Alma.Domain.csproj",
+        "packagesPath": "C:\\Users\\nelso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\25027686\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nelso\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -208,6 +226,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -220,7 +239,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -263,24 +288,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Infra\\Alma.Infra.csproj": {
+    "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Infra\\Alma.Infra.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Infra\\Alma.Infra.csproj",
+        "projectUniqueName": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Infra\\Alma.Infra.csproj",
         "projectName": "Alma.Infra",
-        "projectPath": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Infra\\Alma.Infra.csproj",
-        "packagesPath": "C:\\Users\\25027686\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Infra\\obj\\",
+        "projectPath": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Infra\\Alma.Infra.csproj",
+        "packagesPath": "C:\\Users\\nelso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Infra\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\25027686\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nelso\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -289,17 +314,18 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\Alma.Application.csproj": {
-                "projectPath": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\Alma.Application.csproj"
+              "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\Alma.Application.csproj": {
+                "projectPath": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\Alma.Application.csproj"
               },
-              "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Domain\\Alma.Domain.csproj": {
-                "projectPath": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Domain\\Alma.Domain.csproj"
+              "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Domain\\Alma.Domain.csproj": {
+                "projectPath": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Domain\\Alma.Domain.csproj"
               }
             }
           }
@@ -308,7 +334,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -357,7 +389,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
