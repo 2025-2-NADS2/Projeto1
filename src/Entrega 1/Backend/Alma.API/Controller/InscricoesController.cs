@@ -1,6 +1,4 @@
 ﻿using Alma.Application.Interfaces.Repositorios;
-using Alma.Application.Services;
-using Alma.Infra.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -10,11 +8,9 @@ namespace Alma.API.Controller
     [Route("api/[controller]")]
     public class InscricoesController : ControllerBase
     {
-        private readonly AlmaDbContext _context;
         private readonly IInscricoesService _inscricoesService;
-        public InscricoesController(AlmaDbContext context, IInscricoesService inscricoesService)
+        public InscricoesController(IInscricoesService inscricoesService)
         {
-            _context = context;
             _inscricoesService = inscricoesService;
         }
 

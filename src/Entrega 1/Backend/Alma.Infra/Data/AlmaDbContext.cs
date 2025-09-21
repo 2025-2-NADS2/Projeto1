@@ -15,7 +15,13 @@ namespace Alma.Infra.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            // Aqui você pode usar Fluent API para configurações específicas
+
+            // Mapeia a entidade Usuario para a tabela 'usuarios' no schema 'railway'
+            modelBuilder.Entity<Usuario>().ToTable("usuarios", "railway");
+
+            modelBuilder.Entity<Usuario>()
+                .Property(u => u.DateCreated)
+                .HasColumnName("criado_em");
         }
     }
 }

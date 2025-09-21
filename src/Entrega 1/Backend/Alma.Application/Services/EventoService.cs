@@ -1,8 +1,6 @@
 ﻿using Alma.Application.DTOs.Evento;
 using Alma.Application.Interfaces.Repositorios;
-using Alma.Domain.DTOs.Usuario;
 using Alma.Domain.Entities;
-using Alma.Domain.Enum;
 
 namespace Alma.Application.Services
 {
@@ -24,8 +22,7 @@ namespace Alma.Application.Services
 
         public async Task<Guid> CriarNovoEvento(NovoEventoDto dto)
         {
-
-            isValid(dto);
+            Validate(dto);
 
             var evento = new Evento
             {
@@ -36,10 +33,10 @@ namespace Alma.Application.Services
                 HorarioEvento = dto.HorarioEvento,
                 LocalEvento = dto.LocalEvento,
                 TipoEvento = dto.TipoEvento,
-                DateCreated = DateTime.Now,
+                DateCreated = DateTime.UtcNow,
             };
 
-            _eventoRepository.PostEvento(evento);
+            await _eventoRepository.PostEvento(evento);
             await _unitOfWork.CommitAsync();
 
             return evento.Id;
@@ -47,27 +44,26 @@ namespace Alma.Application.Services
 
         public async Task UpdateEvento(NovoEventoDto dto)
         {
+            if (dto.Id == Guid.Empty) throw new ArgumentException("Id do evento é obrigatório.");
 
-            isValid(dto);
+            Validate(dto);
 
-            var evento = new Evento
-            {
-                Titulo = dto.Titulo,
-                Descricao = dto.Descricao,
-                Date = dto.Date,
-                HorarioEvento = dto.HorarioEvento,
-                LocalEvento = dto.LocalEvento,
-                TipoEvento = dto.TipoEvento,
-                DateCreated = DateTime.Now,
-            };
+            var existente = await _eventoRepository.GetEventoById(dto.Id);
+            if (existente == null) throw new InvalidOperationException("Evento não encontrado.");
 
-            _eventoRepository.UpdateEvento(evento);
+            existente.Titulo = dto.Titulo;
+            existente.Descricao = dto.Descricao;
+            existente.Date = dto.Date;
+            existente.HorarioEvento = dto.HorarioEvento;
+            existente.LocalEvento = dto.LocalEvento;
+            existente.TipoEvento = dto.TipoEvento;
+            // não altere DateCreated aqui
+
+            await _eventoRepository.UpdateEvento(existente);
             await _unitOfWork.CommitAsync();
-
         }
 
-
-        private void isValid(NovoEventoDto dto)
+        private static void Validate(NovoEventoDto dto)
         {
             if (string.IsNullOrWhiteSpace(dto.Titulo))
                 throw new ArgumentException("Título é obrigatório.");
@@ -78,17 +74,11 @@ namespace Alma.Application.Services
             if (!dto.Date.HasValue || dto.Date.Value == default)
                 throw new ArgumentException("Data do evento é obrigatória.");
 
-            if (!dto.HorarioEvento.HasValue || dto.HorarioEvento <= 0 || dto.HorarioEvento > 23.59)
+            if (!dto.HorarioEvento.HasValue || dto.HorarioEvento <= 0 || dto.HorarioEvento > 23.99)
                 throw new ArgumentException("Horário do evento é inválido.");
 
             if (string.IsNullOrWhiteSpace(dto.LocalEvento))
                 throw new ArgumentException("Local do evento é obrigatório.");
-
-            if (dto.TipoEvento == null || dto.TipoEvento == 0) // se 0 for "NaoDefinido"
-                throw new ArgumentException("Tipo de evento é obrigatório.");
-
-            if (dto.DateCreated == default)
-                throw new ArgumentException("Data de criação do evento é obrigatória.");
         }
     }
 }

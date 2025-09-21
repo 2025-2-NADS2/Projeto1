@@ -1,4 +1,4 @@
-﻿namespace Alma.Domain.DTOs.Usuario
+﻿namespace Alma.Application.DTOs.Usuario
 {
     public class NovoUsuarioDto
     {

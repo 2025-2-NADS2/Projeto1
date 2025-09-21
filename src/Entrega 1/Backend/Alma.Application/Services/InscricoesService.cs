@@ -1,7 +1,5 @@
 ﻿using Alma.Application.Interfaces.Repositorios;
 using Alma.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace Alma.Application.Services
 {
@@ -26,7 +24,7 @@ namespace Alma.Application.Services
                 DateCreated = DateTime.UtcNow
             };
 
-            _inscricoesRepository.PostInscricao(inscricao);
+            await _inscricoesRepository.PostInscricao(inscricao);
             await _unitOfWork.CommitAsync();
             
             return inscricao.Id;

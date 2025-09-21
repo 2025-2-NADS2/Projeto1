@@ -1,12 +1,7 @@
 ﻿using Alma.Application.DTOs.Evento;
 using Alma.Application.Interfaces.Repositorios;
-using Alma.Application.Services;
-using Alma.Domain.DTOs.Usuario;
 using Alma.Domain.Entities;
-using Alma.Infra.Data;
-using Alma.Infra.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace Alma.API.Controller
 {
@@ -14,12 +9,10 @@ namespace Alma.API.Controller
     [Route("api/[controller]")]
     public class EventoController : ControllerBase
     {
-        private readonly AlmaDbContext _context;
         private readonly IEventoService _eventoService;
 
-        public EventoController(AlmaDbContext context, IEventoService eventoService)
+        public EventoController(IEventoService eventoService)
         {
-            _context = context;
             _eventoService = eventoService;
         }
 

@@ -1,6 +1,5 @@
 ﻿using Alma.Application.DTOs.Usuario;
 using Alma.Application.Interfaces.Repositorios;
-using Alma.Domain.DTOs.Usuario;
 using Alma.Domain.Entities;
 
 namespace Alma.Application.Services
@@ -21,9 +20,9 @@ namespace Alma.Application.Services
             if (string.IsNullOrWhiteSpace(dto.Nome) || string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Senha))
                 throw new ArgumentException("Nome, Email e Senha são obrigatórios.");
 
-            var existeUsuario = await _usuarioRepository.GetUsuarios();
+            var usuarios = await _usuarioRepository.GetUsuarios();
 
-            if (existeUsuario.Any(x => x.Email == dto.Email))
+            if (usuarios.Any(x => x.Email == dto.Email))
                 throw new InvalidOperationException("Já existe um usuário com esse e-mail.");
 
             var usuario = new Usuario
@@ -32,10 +31,10 @@ namespace Alma.Application.Services
                 Name = dto.Nome,
                 Email = dto.Email,
                 Senha = BCrypt.Net.BCrypt.HashPassword(dto.Senha),
-                DateCreted = DateTime.Now,
+                DateCreated = DateTime.UtcNow,
             };
 
-            _usuarioRepository.PostUsuario(usuario);
+            await _usuarioRepository.PostUsuario(usuario);
             await _unitOfWork.CommitAsync();
 
             return usuario.Id;
@@ -52,32 +51,35 @@ namespace Alma.Application.Services
 
         public async Task UpdateUsuario(NovoUsuarioDto dto)
         {
-            if (string.IsNullOrWhiteSpace(dto.Nome) || string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Senha))
-                throw new ArgumentException("Nome, Email e Senha são obrigatórios.");
+            if (string.IsNullOrWhiteSpace(dto.Nome) || string.IsNullOrWhiteSpace(dto.Email))
+                throw new ArgumentException("Nome e Email são obrigatórios.");
 
-            var existeUsuario = await _usuarioRepository.GetUsuarios();
+            var existente = await _usuarioRepository.GetUsuarioByEmail(dto.Email);
+            if (existente == null)
+                throw new InvalidOperationException("Usuário não encontrado.");
 
-            if (existeUsuario.Any(x => x.Email == dto.Email))
-                throw new InvalidOperationException("Já existe um usuário com esse e-mail.");
-
-            var usuario = new Usuario
+            existente.Name = dto.Nome;
+            if (!string.IsNullOrWhiteSpace(dto.Senha))
             {
-                Name = dto.Nome,
-                Email = dto.Email,
-                Senha = BCrypt.Net.BCrypt.HashPassword(dto.Senha),
-                DateCreted = DateTime.Now,
-            };
+                existente.Senha = BCrypt.Net.BCrypt.HashPassword(dto.Senha);
+            }
 
-            _usuarioRepository.UpdateUsuario(usuario);
+            await _usuarioRepository.UpdateUsuario(existente);
             await _unitOfWork.CommitAsync();
-
         }
         public async Task DeleteUsuario(Guid id)
         {
             var usuario = await _usuarioRepository.GetUsuarioById(id);
+            if (usuario == null)
+                throw new InvalidOperationException("Usuário não encontrado.");
+
             await _usuarioRepository.DeleteUsuarioByUser(usuario);
             await _unitOfWork.CommitAsync();
 
+        }
+        public async Task<List<Usuario>> GetUsuarios()
+        {
+            return await _usuarioRepository.GetUsuarios();
         }
     }
 }
