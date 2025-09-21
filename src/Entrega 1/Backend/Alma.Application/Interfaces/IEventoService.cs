@@ -6,7 +6,7 @@ namespace Alma.Application.Interfaces.Repositorios
     public interface IEventoService
     {
         Task<List<Evento>> GetTodosEventosDisponiveis();
-        Task<Guid> CriarNovoEvento(NovoEventoDto dto);
+        Task<int> CriarNovoEvento(NovoEventoDto dto);
         Task UpdateEvento(NovoEventoDto dto);
 
     }

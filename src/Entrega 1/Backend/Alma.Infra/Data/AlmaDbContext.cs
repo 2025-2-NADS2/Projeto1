@@ -16,12 +16,12 @@ namespace Alma.Infra.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Mapeia a entidade Usuario para a tabela 'usuarios' no schema 'railway'
-            modelBuilder.Entity<Usuario>().ToTable("usuarios", "railway");
-
-            modelBuilder.Entity<Usuario>()
-                .Property(u => u.DateCreated)
-                .HasColumnName("criado_em");
+            // Mapeia entidades para tabelas corretas
+            modelBuilder.Entity<Usuario>().ToTable("usuarios");
+            modelBuilder.Entity<Campanha>().ToTable("campanhas_doacoes");
+            modelBuilder.Entity<Evento>().ToTable("eventos");
+            modelBuilder.Entity<Historias>().ToTable("historias_destaque");
+            modelBuilder.Entity<Inscricoes>().ToTable("inscricoes_eventos");
         }
     }
 }

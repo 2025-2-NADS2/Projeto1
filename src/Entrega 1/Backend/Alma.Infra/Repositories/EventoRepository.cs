@@ -16,21 +16,24 @@ namespace Alma.Infra.Repositories
 
         public async Task<List<Evento>> GetAllEventosDisponiveis()
         {
+            var now = DateTime.UtcNow; // usa UTC para consistência
             return await _context.Eventos
                 .AsNoTracking()
-                .Where(e => e.Date > DateTime.Now)
+                .Where(e => e.DataEvento > now)
+                .OrderBy(e => e.DataEvento)
                 .ToListAsync();
         }
         public async Task<List<Evento>> GetEventos()
         {
             return await _context.Eventos
                 .AsNoTracking()
+                .OrderBy(e => e.DataEvento)
                 .ToListAsync();
         }
 
-        public async Task<Evento?> GetEventoById(Guid id)
+        public async Task<Evento?> GetEventoById(int id)
         {
-            return await _context.Eventos.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Eventos.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task PostEvento(Evento evento)
@@ -38,10 +41,10 @@ namespace Alma.Infra.Repositories
             await _context.Eventos.AddAsync(evento);
         }
 
-        public async Task UpdateEvento(Evento evento)
+        public Task UpdateEvento(Evento evento)
         {
             _context.Eventos.Update(evento);
-            await Task.CompletedTask;
+            return Task.CompletedTask;
         }
     }
 }

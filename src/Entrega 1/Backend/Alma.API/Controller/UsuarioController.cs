@@ -22,8 +22,16 @@ namespace Alma.API.Controller
         {
             try
             {
-                await _usuarioService.CriarUsuario(dto);
-                return Ok();
+                var id = await _usuarioService.CriarUsuario(dto);
+                return CreatedAtAction(nameof(GetUsuarios), new { id }, new { id });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { mensagem = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(new { mensagem = ex.Message });
             }
             catch (Exception ex)
             {
@@ -32,18 +40,18 @@ namespace Alma.API.Controller
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginDto dto)
+        public async Task<IActionResult> Login([FromBody] LoginDto dto)
         {
             try
             {
                 var usuario = await _usuarioService.LoginUsuario(dto.Email, dto.Senha);
                 var token = _jwt.GenerateToken(usuario.Id, usuario.Email);
 
-                return Ok(new { Token = token });
+                return Ok(new { token });
             }
             catch (Exception ex)
             {
-                return Unauthorized(ex.Message);
+                return Unauthorized(new { mensagem = ex.Message });
             }
         }
 
@@ -53,7 +61,15 @@ namespace Alma.API.Controller
             try
             {
                 await _usuarioService.UpdateUsuario(dto);
-                return Ok();
+                return NoContent();
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { mensagem = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(new { mensagem = ex.Message });
             }
             catch (Exception ex)
             {
@@ -67,7 +83,11 @@ namespace Alma.API.Controller
             try
             {
                 await _usuarioService.DeleteUsuario(id);
-                return Ok();
+                return NoContent();
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(new { mensagem = ex.Message });
             }
             catch (Exception ex)
             {

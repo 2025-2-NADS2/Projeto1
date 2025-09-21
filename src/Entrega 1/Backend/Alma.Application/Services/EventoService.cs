@@ -20,20 +20,20 @@ namespace Alma.Application.Services
             return await _eventoRepository.GetAllEventosDisponiveis();
         }
 
-        public async Task<Guid> CriarNovoEvento(NovoEventoDto dto)
+        public async Task<int> CriarNovoEvento(NovoEventoDto dto)
         {
             Validate(dto);
 
             var evento = new Evento
             {
-                Id = Guid.NewGuid(),
+                // Id será gerado pelo banco (IDENTITY) se configurado
                 Titulo = dto.Titulo,
                 Descricao = dto.Descricao,
-                Date = dto.Date,
-                HorarioEvento = dto.HorarioEvento,
-                LocalEvento = dto.LocalEvento,
-                TipoEvento = dto.TipoEvento,
-                DateCreated = DateTime.UtcNow,
+                DataEvento = dto.DataEvento,
+                Horario = dto.Horario,
+                Local = dto.Local,
+                Status = dto.Status ?? "ativo",
+                CriadoEm = DateTime.UtcNow,
             };
 
             await _eventoRepository.PostEvento(evento);
@@ -44,7 +44,7 @@ namespace Alma.Application.Services
 
         public async Task UpdateEvento(NovoEventoDto dto)
         {
-            if (dto.Id == Guid.Empty) throw new ArgumentException("Id do evento é obrigatório.");
+            if (dto.Id <= 0) throw new ArgumentException("Id do evento é obrigatório.");
 
             Validate(dto);
 
@@ -53,11 +53,12 @@ namespace Alma.Application.Services
 
             existente.Titulo = dto.Titulo;
             existente.Descricao = dto.Descricao;
-            existente.Date = dto.Date;
-            existente.HorarioEvento = dto.HorarioEvento;
-            existente.LocalEvento = dto.LocalEvento;
-            existente.TipoEvento = dto.TipoEvento;
-            // não altere DateCreated aqui
+            existente.DataEvento = dto.DataEvento;
+            existente.Horario = dto.Horario;
+            existente.Local = dto.Local;
+            existente.Status = dto.Status ?? existente.Status;
+            existente.AtualizadoEm = DateTime.UtcNow; // atualiza timestamp de atualização
+            // não altere CriadoEm aqui
 
             await _eventoRepository.UpdateEvento(existente);
             await _unitOfWork.CommitAsync();
@@ -71,13 +72,13 @@ namespace Alma.Application.Services
             if (string.IsNullOrWhiteSpace(dto.Descricao))
                 throw new ArgumentException("Descrição é obrigatória.");
 
-            if (!dto.Date.HasValue || dto.Date.Value == default)
+            if (dto.DataEvento == default)
                 throw new ArgumentException("Data do evento é obrigatória.");
 
-            if (!dto.HorarioEvento.HasValue || dto.HorarioEvento <= 0 || dto.HorarioEvento > 23.99)
+            if (dto.Horario.HasValue && (dto.Horario.Value < TimeSpan.Zero || dto.Horario.Value >= TimeSpan.FromDays(1)))
                 throw new ArgumentException("Horário do evento é inválido.");
 
-            if (string.IsNullOrWhiteSpace(dto.LocalEvento))
+            if (string.IsNullOrWhiteSpace(dto.Local))
                 throw new ArgumentException("Local do evento é obrigatório.");
         }
     }

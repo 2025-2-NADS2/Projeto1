@@ -19,12 +19,15 @@ namespace Alma.Infra.Repositories
         }
         public async Task<List<Usuario>> GetUsuarios()
         {
-            return await _context.Usuarios.AsNoTracking().ToListAsync();
+            return await _context.Usuarios
+                .AsNoTracking()
+                .OrderBy(u => u.Nome)
+                .ToListAsync();
         }
 
         public async Task<Usuario?> GetUsuarioByEmail(string email)
         {
-            return await _context.Usuarios.FirstOrDefaultAsync(x => x.Email == email);
+            return await _context.Usuarios.AsNoTracking().FirstOrDefaultAsync(x => x.Email == email);
         }
 
         public async Task UpdateUsuario(Usuario usuario)
@@ -40,8 +43,7 @@ namespace Alma.Infra.Repositories
         
         public async Task<Usuario?> GetUsuarioById(Guid id)
         {
-            return await _context.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Usuarios.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
-
     }
 }

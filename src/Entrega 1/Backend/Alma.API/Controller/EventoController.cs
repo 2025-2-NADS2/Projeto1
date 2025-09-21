@@ -16,7 +16,7 @@ namespace Alma.API.Controller
             _eventoService = eventoService;
         }
 
-        [HttpGet("get/eventos")]
+        [HttpGet("get/eventos")] // retorna somente disponíveis
         public async Task<ActionResult<List<Evento>>> GetTodosEventosDisponiveis()
         {
             try
@@ -26,7 +26,7 @@ namespace Alma.API.Controller
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro interno ao buscar eventos: {ex.Message}");
+                return StatusCode(500, new { mensagem = "Erro interno ao buscar eventos.", detalhe = ex.Message });
             }
         }
 
@@ -35,21 +35,34 @@ namespace Alma.API.Controller
         {
             try
             {
-                await _eventoService.CriarNovoEvento(dto);
-                return Ok();
+                var id = await _eventoService.CriarNovoEvento(dto);
+                return CreatedAtAction(nameof(GetTodosEventosDisponiveis), new { id }, new { id });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { mensagem = ex.Message });
             }
             catch (Exception ex)
             {
                 return StatusCode(500, new { mensagem = "Erro interno no servidor.", detalhe = ex.Message });
             }
         }
+
         [HttpPut("put/update/evento")]
         public async Task<IActionResult> AtualizaEvento([FromBody] NovoEventoDto dto)
         {
             try
             {
                 await _eventoService.UpdateEvento(dto);
-                return Ok();
+                return NoContent();
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { mensagem = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(new { mensagem = ex.Message });
             }
             catch (Exception ex)
             {
