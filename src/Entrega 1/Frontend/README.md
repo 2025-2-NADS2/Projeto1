@@ -1,19 +1,23 @@
-# Getting Started with Create React App
+# Guia de Inicialização com Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este projeto foi criado com [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Scripts Disponíveis
 
-In the project directory, you can run:
+No diretório do projeto, você pode executar:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+⚠️ **Problema comum**  
+Caso após usar `npm start` aparecer o erro:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+'react-scripts' não é reconhecido como um comando interno
+ou externo, um programa operável ou um arquivo em lotes.
 
-⚠️ **Common issue**:  
-If you see this error when running `npm start`:
+use:
+
+```bash
+npm install
+
+npm start
 
