@@ -1,0 +1,150 @@
+DOCUMENTO TÉCNICO – ESTRUTURA DO BANCO DE DADOS
+Projeto: SoulWare – Instituto Alma
+Autor: Nelson dos Reis Gomes Souza
+Entrega 1 – Projeto Interdisciplinar (2º Semestre ADS 2025)
+
+Objetivo:
+Apresentar a estrutura inicial do banco de dados do projeto SoulWare,
+atendendo aos requisitos da 1ª entrega do Projeto Interdisciplinar:
+– Definição das tabelas.
+– Definição das chaves primárias e estrangeiras.
+– Criação de índices para melhorar a performance de consultas.
+– Justificativa das escolhas.
+
+---
+
+TABELA `usuarios`
+(Cadastro e autenticação de usuários do sistema)
+
+CREATE TABLE `usuarios` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `telefone` varchar(20) DEFAULT NULL,
+  `permissoes` enum('admin','voluntario') NOT NULL DEFAULT 'voluntario',
+  `status` enum('pendente','aprovado') NOT NULL DEFAULT 'pendente',
+  `criado_em` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `atualizado_em` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `senha_hash` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_usuarios_email` (`email`)
+);
+
+Justificativa do índice: 
+O índice único (UNIQUE KEY) na coluna email garante a unicidade do cadastro, impedindo que múltiplos usuários se cadastrem com o mesmo endereço de e-mail. Além disso, otimiza drasticamente a performance de consultas de autenticação (login), que utilizam o e-mail como principal critério de busca.
+---
+
+TABELA `eventos`
+(Controle de eventos do Instituto Alma)
+
+CREATE TABLE `eventos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(150) NOT NULL,
+  `descricao` text,
+  `data_evento` date NOT NULL,
+  `horario` time DEFAULT NULL,
+  `local` varchar(200) DEFAULT NULL,
+  `status` enum('planejado','finalizado','cancelado') NOT NULL DEFAULT 'planejado',
+  `criado_em` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `atualizado_em` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+  KEY `idx_eventos_titulo` (`titulo`)
+);
+
+Justificativa do índice:
+A criação de um índice na coluna titulo visa acelerar as operações de busca e filtragem de eventos. Consultas que utilizam o título como critério, comuns em painéis administrativos e áreas públicas do sistema, se beneficiarão de uma performance significativamente superior.
+
+---
+
+TABELA `inscricoes_eventos`
+(Vincula usuários a eventos com chave composta para evitar duplicidades)
+
+CREATE TABLE `inscricoes_eventos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `usuario_id` int NOT NULL,
+  `evento_id` int NOT NULL,
+  `data_inscricao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_inscricoes_usuario_evento` (`usuario_id`,`evento_id`),
+  KEY `inscricoes_eventos_ibfk_2` (`evento_id`),
+  CONSTRAINT `inscricoes_eventos_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `inscricoes_eventos_ibfk_2` FOREIGN KEY (`evento_id`) REFERENCES `eventos` (`id`) ON DELETE CASCADE
+);
+
+Justificativa do índice:
+O índice composto `usuario_id + evento_id` impede inscrições duplicadas e acelera a busca de inscrições de um usuário específico.
+
+---
+
+TABELA `publicacoes`
+(Nossas Atividades, com posts, imagens e categorias)
+
+CREATE TABLE `publicacoes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(150) NOT NULL,
+  `conteudo` text NOT NULL,
+  `imagem_url` text,
+  `categoria` varchar(100) NOT NULL,
+  `autor_id` int DEFAULT NULL,
+  `criado_em` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `atualizado_em` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `publicacoes_ibfk_1` (`autor_id`),
+  CONSTRAINT `publicacoes_ibfk_1` FOREIGN KEY (`autor_id`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL
+);
+
+---
+
+TABELA `documentos_transparencia`
+(Uploads de relatórios em PDF)
+
+CREATE TABLE `documentos_transparencia` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(150) NOT NULL,
+  `descricao` text,
+  `arquivo_url` text NOT NULL,
+  `data_publicacao` date NOT NULL,
+  `criado_em` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+
+---
+
+TABELA `campanhas_doacoes`
+(Registro de campanhas e metas de doação)
+
+CREATE TABLE `campanhas_doacoes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(150) NOT NULL,
+  `descricao` text,
+  `meta_valor` decimal(10,2) DEFAULT NULL,
+  `data_inicio` datetime NOT NULL,
+  `data_fim` datetime DEFAULT NULL,
+  `status` enum('ativa','finalizada') DEFAULT 'ativa',
+  `criado_em` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `atualizado_em` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+
+---
+
+TABELA `ouvidoria_mensagens`
+(Formulário de contato da Ouvidoria)
+
+CREATE TABLE `ouvidoria_mensagens` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `telefone` varchar(20) DEFAULT NULL,
+  `mensagem` text NOT NULL,
+  `status` enum('novo','lido','respondido') NOT NULL DEFAULT 'novo',
+  `data_envio` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+
+---
+
+Observações finais:
+– Os índices foram criados apenas nas colunas realmente usadas em filtros e chaves, para garantir desempenho sem comprometer as operações de escrita.
+– As chaves estrangeiras garantem integridade referencial entre tabelas relacionadas.
+– A criação das Views exigidas pelo Projeto Interdisciplinar será apresentada na 2ª entrega, junto às consultas completas do backend, conforme cronograma estabelecido.
