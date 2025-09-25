@@ -15,7 +15,13 @@ namespace Alma.Infra.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            // Aqui você pode usar Fluent API para configurações específicas
+
+            // Mapeia entidades para tabelas corretas
+            modelBuilder.Entity<Usuario>().ToTable("usuarios");
+            modelBuilder.Entity<Campanha>().ToTable("campanhas_doacoes");
+            modelBuilder.Entity<Evento>().ToTable("eventos");
+            modelBuilder.Entity<Historias>().ToTable("historias_destaque");
+            modelBuilder.Entity<Inscricoes>().ToTable("inscricoes_eventos");
         }
     }
 }

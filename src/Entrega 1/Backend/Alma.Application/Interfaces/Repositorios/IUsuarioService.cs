@@ -1,4 +1,4 @@
-﻿using Alma.Domain.DTOs.Usuario;
+using Alma.Application.DTOs.Usuario;
 using Alma.Domain.Entities;
 
 namespace Alma.Application.Interfaces.Repositorios
@@ -9,5 +9,6 @@ namespace Alma.Application.Interfaces.Repositorios
         Task<Usuario> LoginUsuario(string email, string senha);
         Task UpdateUsuario(NovoUsuarioDto dto);
         Task DeleteUsuario(Guid id);
+        Task<List<Usuario>> GetUsuarios();
     }
 }

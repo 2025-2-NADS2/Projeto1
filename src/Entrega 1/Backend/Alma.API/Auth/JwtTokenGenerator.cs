@@ -1,4 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
@@ -19,7 +19,7 @@ namespace Alma.API.Auth
         public string GenerateToken(Guid userId, string email)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_secret);
+            var key = Encoding.UTF8.GetBytes(_secret); // usa UTF8 para alinhar com Program.cs
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

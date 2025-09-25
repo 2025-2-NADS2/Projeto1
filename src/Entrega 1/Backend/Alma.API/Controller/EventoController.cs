@@ -1,12 +1,7 @@
 ﻿using Alma.Application.DTOs.Evento;
 using Alma.Application.Interfaces.Repositorios;
-using Alma.Application.Services;
-using Alma.Domain.DTOs.Usuario;
 using Alma.Domain.Entities;
-using Alma.Infra.Data;
-using Alma.Infra.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace Alma.API.Controller
 {
@@ -14,16 +9,14 @@ namespace Alma.API.Controller
     [Route("api/[controller]")]
     public class EventoController : ControllerBase
     {
-        private readonly AlmaDbContext _context;
         private readonly IEventoService _eventoService;
 
-        public EventoController(AlmaDbContext context, IEventoService eventoService)
+        public EventoController(IEventoService eventoService)
         {
-            _context = context;
             _eventoService = eventoService;
         }
 
-        [HttpGet("get/eventos")]
+        [HttpGet("get/eventos")] // retorna somente disponíveis
         public async Task<ActionResult<List<Evento>>> GetTodosEventosDisponiveis()
         {
             try
@@ -33,7 +26,7 @@ namespace Alma.API.Controller
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro interno ao buscar eventos: {ex.Message}");
+                return StatusCode(500, new { mensagem = "Erro interno ao buscar eventos.", detalhe = ex.Message });
             }
         }
 
@@ -42,21 +35,34 @@ namespace Alma.API.Controller
         {
             try
             {
-                await _eventoService.CriarNovoEvento(dto);
-                return Ok();
+                var id = await _eventoService.CriarNovoEvento(dto);
+                return CreatedAtAction(nameof(GetTodosEventosDisponiveis), new { id }, new { id });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { mensagem = ex.Message });
             }
             catch (Exception ex)
             {
                 return StatusCode(500, new { mensagem = "Erro interno no servidor.", detalhe = ex.Message });
             }
         }
+
         [HttpPut("put/update/evento")]
         public async Task<IActionResult> AtualizaEvento([FromBody] NovoEventoDto dto)
         {
             try
             {
                 await _eventoService.UpdateEvento(dto);
-                return Ok();
+                return NoContent();
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { mensagem = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(new { mensagem = ex.Message });
             }
             catch (Exception ex)
             {
