@@ -1,9 +1,6 @@
 ﻿using Alma.API.Auth;
-using Alma.Application.DTOs.Evento;
 using Alma.Application.DTOs.Usuario;
 using Alma.Application.Interfaces.Repositorios;
-using Alma.Application.Services;
-using Alma.Domain.DTOs.Usuario;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Alma.API.Controller
@@ -14,7 +11,7 @@ namespace Alma.API.Controller
     {
         private readonly IUsuarioService _usuarioService;
         private readonly JwtTokenGenerator _jwt;
-        public UsuarioController(UsuarioService usuarioService, JwtTokenGenerator jwt)
+        public UsuarioController(IUsuarioService usuarioService, JwtTokenGenerator jwt)
         {
             _usuarioService = usuarioService;
             _jwt = jwt;
@@ -25,8 +22,16 @@ namespace Alma.API.Controller
         {
             try
             {
-                await _usuarioService.CriarUsuario(dto);
-                return Ok();
+                var id = await _usuarioService.CriarUsuario(dto);
+                return CreatedAtAction(nameof(GetUsuarios), new { id }, new { id });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { mensagem = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(new { mensagem = ex.Message });
             }
             catch (Exception ex)
             {
@@ -35,18 +40,23 @@ namespace Alma.API.Controller
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginDto dto)
+        public async Task<IActionResult> Login([FromBody] LoginDto dto)
         {
             try
             {
+<<<<<<< HEAD
                 var usuario = await _usuarioService.LoginUsuario (dto.Email, dto.Senha);
                 var token = _jwt.GenerateToken(usuario.Id, usuario.Email, usuario.Name);
+=======
+                var usuario = await _usuarioService.LoginUsuario(dto.Email, dto.Senha);
+                var token = _jwt.GenerateToken(usuario.Id, usuario.Email);
+>>>>>>> a900e8ee4019451822bb74b52fc444335ccf643e
 
-                return Ok(new { Token = token });
+                return Ok(new { token });
             }
             catch (Exception ex)
             {
-                return Unauthorized(ex.Message);
+                return Unauthorized(new { mensagem = ex.Message });
             }
         }
 
@@ -56,7 +66,15 @@ namespace Alma.API.Controller
             try
             {
                 await _usuarioService.UpdateUsuario(dto);
-                return Ok();
+                return NoContent();
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { mensagem = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(new { mensagem = ex.Message });
             }
             catch (Exception ex)
             {
@@ -64,17 +82,35 @@ namespace Alma.API.Controller
             }
         }
 
-        [HttpDelete("delete/usuario/{id: Guid}")]
+        [HttpDelete("delete/usuario/{id:guid}")]
         public async Task<IActionResult> DeleteUsuario(Guid id)
         {
             try
             {
                 await _usuarioService.DeleteUsuario(id);
-                return Ok();
+                return NoContent();
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(new { mensagem = ex.Message });
             }
             catch (Exception ex)
             {
                 return StatusCode(500, new { mensagem = "Erro interno no servidor.", detalhe = ex.Message });
+            }
+        }
+
+        [HttpGet("get/usuarios")]
+        public async Task<IActionResult> GetUsuarios()
+        {
+            try
+            {
+                var usuarios = await _usuarioService.GetUsuarios();
+                return Ok(usuarios);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensagem = "Erro interno ao buscar usuários.", detalhe = ex.Message });
             }
         }
     }

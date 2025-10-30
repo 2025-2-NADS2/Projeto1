@@ -1,0 +1,33 @@
+.overlay-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* camada do bitmap */
+.bitmap-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("../assets/overlay/bitmap.png");
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: color-burn;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 3;
+  image-rendering: pixelated;
+}
+
+/* asteriscos */
+.asterisco-img {
+  pointer-events: none;
+  animation: fadeInOut 10s ease-in-out forwards;
+  transform-origin: center center;
+  z-index: 2;
+  image-rendering: pixelated;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: rotate(0deg); }
+  50% { opacity: 0.5; transform: rotate(45deg); }
+  100% { opacity: 0; transform: rotate(90deg); }
+}

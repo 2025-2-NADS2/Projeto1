@@ -1,5 +1,6 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "NSYDqVJDARRgnFa0fW/6kXZoORnQ2gNGNLyEkgUdnoqJ4GahX7ljT2+CZr0NyM0oxGY1DcM/dEDcJgnJBhFWMA==",
   "success": true,
   "projectFilePath": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Domain\\Alma.Domain.csproj",
@@ -47,5 +48,11 @@
     "C:\\Users\\25027686\\.nuget\\packages\\system.text.encodings.web\\9.0.9\\system.text.encodings.web.9.0.9.nupkg.sha512",
     "C:\\Users\\25027686\\.nuget\\packages\\system.text.json\\9.0.9\\system.text.json.9.0.9.nupkg.sha512"
   ],
+=======
+  "dgSpecHash": "f6TGGpnGXUo=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Domain\\Alma.Domain.csproj",
+  "expectedPackageFiles": [],
+>>>>>>> a900e8ee4019451822bb74b52fc444335ccf643e
   "logs": []
 }

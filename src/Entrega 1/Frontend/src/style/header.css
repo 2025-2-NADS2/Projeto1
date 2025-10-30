@@ -1,0 +1,79 @@
+/* Header */
+.header {
+  width: 100%;
+  background-color: #fffdee;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  position: fixed;
+  top: 0;
+  z-index: 50;
+}
+
+.imgAlma_header {
+  width: 120px;
+}
+
+.header .container {
+  max-width: 1800px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+.header .logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #00695c;
+}
+
+.header nav ul {
+  display: flex;
+  gap: 2rem;
+}
+
+.header nav ul li a {
+  text-decoration: none;
+  color: #00695c;
+  font-weight: 500;
+  font-family: 'axiforma_light', sans-serif;
+  transition: 0.3s;
+}
+
+.header nav ul li a:hover {
+  color: #004d40;
+  font-family: 'axiforma_semibold', sans-serif;
+}
+
+.header-buttons button {
+  margin-left: 1rem;
+  margin-top: 0rem;
+  font-family: 'axiforma_semibold', sans-serif;
+  border-radius: 2rem;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #1D2344;
+  border: none;
+  padding: 0.6rem 2rem 0.4rem;
+  color: white;
+  transition: box-shadow 0.4s ease, background-color 0.4s ease, transform 0.4s ease; 
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  background-color: #252c50; 
+  box-shadow: 0 0 15px 5px #0000005b; 
+}
+
+.btn-secondary {
+  background-color: transparent; 
+  border: 2px solid #000000;   
+  padding: 0.5rem 2rem 0.3rem; 
+  color: #000000;
+}
+
+.btn-secondary:hover {
+  background-color: #e0f2f1;
+}
