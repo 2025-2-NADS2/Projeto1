@@ -40,7 +40,7 @@ namespace Alma.API.Controller
             try
             {
                 var usuario = await _usuarioService.LoginUsuario (dto.Email, dto.Senha);
-                var token = _jwt.GenerateToken(usuario.Id, usuario.Email);
+                var token = _jwt.GenerateToken(usuario.Id, usuario.Email, usuario.Name);
 
                 return Ok(new { Token = token });
             }

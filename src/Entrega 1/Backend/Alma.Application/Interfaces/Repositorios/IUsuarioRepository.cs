@@ -10,5 +10,6 @@ namespace Alma.Application.Interfaces.Repositorios
         Task UpdateUsuario(Usuario usuario);
         Task<Usuario> GetUsuarioById(Guid id);
         Task DeleteUsuarioByUser(Usuario usuario);
+        Task<Usuario?> AutenticarAsync(string email, string senha);
     }
 }

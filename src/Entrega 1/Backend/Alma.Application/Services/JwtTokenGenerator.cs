@@ -16,7 +16,7 @@ namespace Alma.API.Auth
             _secret = configuration["Jwt:Key"] ?? throw new Exception("JWT Secret not configured");
         }
 
-        public string GenerateToken(Guid userId, string email)
+        public string GenerateToken(Guid userId, string email, string nome)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_secret);
@@ -26,7 +26,8 @@ namespace Alma.API.Auth
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
-                    new Claim(ClaimTypes.Email, email)
+                    new Claim(ClaimTypes.Email, email),
+                    new Claim("Nome", nome)  // <-- Adicione esta claim customizad
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(

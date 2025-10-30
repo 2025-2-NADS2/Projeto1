@@ -38,5 +38,11 @@ namespace Alma.Infra.Repositories
             return await _context.Usuarios.FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
 
+        public async Task<Usuario?> AutenticarAsync(string email, string senha)
+        {
+            // Exemplo simples (depois você pode colocar hash de senha)
+            return await _context.Usuarios
+                .FirstOrDefaultAsync(u => u.Email == email && u.Senha == senha);
+        }
     }
 }

@@ -4,20 +4,18 @@ using Alma.Application.Interfaces.Repositorios;
 using Alma.API.Auth;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//// Configurar DbContext com SQLite
-//builder.Services.AddDbContext<AlmaDbContext>(options =>
-//    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Configurar DbContext com MySQL
 builder.Services.AddDbContext<AlmaDbContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
         ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
     )
 );
+
 // Injetar repositórios
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IEventoRepository, EventoRepository>();
@@ -26,38 +24,16 @@ builder.Services.AddScoped<IHistoriasRepository, HistoriasRepository>();
 builder.Services.AddScoped<IInscricoesRepository, InscricoesRepository>();
 builder.Services.AddScoped<JwtTokenGenerator>();
 
-// Configurar controllers
 builder.Services.AddControllers();
 
-var app = builder.Build();
-
-// Middleware de autenticação JWT manual
 var secretKey = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]);
 
-app.Use(async (context, next) =>
-{
-    // Pular autenticação para endpoints públicos
-    if (context.Request.Path.StartsWithSegments("/login") ||
-        context.Request.Path.StartsWithSegments("/public"))
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer(options =>
     {
-        await next();
-        return;
-    }
-
-    var authHeader = context.Request.Headers["Authorization"].ToString();
-    var token = authHeader.Replace("Bearer ", "");
-
-    if (string.IsNullOrEmpty(token))
-    {
-        context.Response.StatusCode = 401;
-        await context.Response.WriteAsync("Token não fornecido");
-        return;
-    }
-
-    try
-    {
-        var tokenHandler = new JwtSecurityTokenHandler();
-        tokenHandler.ValidateToken(token, new TokenValidationParameters
+        options.RequireHttpsMetadata = false; // pode deixar true em produção
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = false,
             ValidateAudience = false,
@@ -65,18 +41,41 @@ app.Use(async (context, next) =>
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(secretKey),
             ClockSkew = TimeSpan.Zero
-        }, out var validatedToken);
+        };
+    });
 
-        await next(); // Token válido, continua
-    }
-    catch
-    {
-        context.Response.StatusCode = 401;
-        await context.Response.WriteAsync("Token inválido");
-    }
+// Habilitar autorização
+builder.Services.AddAuthorization();
+
+var app = builder.Build();
+
+// ----------------------------
+// 🚀 Middleware padrão do ASP.NET
+// ----------------------------
+app.UseRouting();
+app.UseAuthentication(); // <--- autenticação JWT
+app.UseAuthorization();  // <--- autorização baseada nas claims
+
+// Rotas públicas (ex: login)
+app.MapPost("/login", async (HttpContext context, IUsuarioRepository usuarioRepo, JwtTokenGenerator jwtGen) =>
+{
+    // Exemplo simples de login manual (ajuste conforme seu código atual)
+    var body = await context.Request.ReadFromJsonAsync<LoginDto>();
+    var usuario = await usuarioRepo.AutenticarAsync(body.Email, body.Senha);
+
+    if (usuario == null)
+        return Results.Unauthorized();
+
+    // Correção: Passar usuario.Id (Guid) e usuario.Email (string) para GenerateToken
+    var token = jwtGen.GenerateToken(usuario.Id, usuario.Email, usuario.Name); 
+    
+    return Results.Ok(new { token });
 });
 
-// Configurar roteamento e controllers
+// Controllers (demais rotas)
 app.MapControllers();
 
 app.Run();
+
+// DTO temporário de login
+public record LoginDto(string Email, string Senha);
