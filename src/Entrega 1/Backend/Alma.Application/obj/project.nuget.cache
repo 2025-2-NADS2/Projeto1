@@ -1,9 +1,18 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "T7wgi4ngEdtbtC6mGrkJ1nyDjml+nRIX3nGQbUfrOwDJl+jAElhv7E7xCBDdR04ru03ltvHEgCL/xdwjFzWmzA==",
+=======
+<<<<<<< HEAD
+  "dgSpecHash": "ETjHMuqUL+idd0pwqxoYCdxOmxGGkXACZVXZeVlcWMTQrMauivkIH+31UpogJaASR5ovX7FIw9xbOV+B5OVbDQ==",
+=======
+  "dgSpecHash": "2d1FuJHKAtg=",
+>>>>>>> a900e8ee4019451822bb74b52fc444335ccf643e
+>>>>>>> c5311ff5b00b4eb6d1ee3e753ac2a05e5328884f
   "success": true,
-  "projectFilePath": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\Alma.Application.csproj",
+  "projectFilePath": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\Alma.Application.csproj",
   "expectedPackageFiles": [
+<<<<<<< HEAD
     "C:\\Users\\25027686\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\25027686\\.nuget\\packages\\bouncycastle.cryptography\\2.6.1\\bouncycastle.cryptography.2.6.1.nupkg.sha512",
     "C:\\Users\\25027686\\.nuget\\packages\\mailkit\\4.14.1\\mailkit.4.14.1.nupkg.sha512",
@@ -53,8 +62,15 @@
     "C:\\Users\\25027686\\.nuget\\packages\\system.security.cryptography.protecteddata\\6.0.0\\system.security.cryptography.protecteddata.6.0.0.nupkg.sha512",
     "C:\\Users\\25027686\\.nuget\\packages\\system.security.permissions\\6.0.0\\system.security.permissions.6.0.0.nupkg.sha512",
     "C:\\Users\\25027686\\.nuget\\packages\\system.text.encodings.web\\9.0.9\\system.text.encodings.web.9.0.9.nupkg.sha512",
+<<<<<<< HEAD
     "C:\\Users\\25027686\\.nuget\\packages\\system.text.json\\9.0.9\\system.text.json.9.0.9.nupkg.sha512",
     "C:\\Users\\25027686\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
+=======
+    "C:\\Users\\25027686\\.nuget\\packages\\system.text.json\\9.0.9\\system.text.json.9.0.9.nupkg.sha512"
+=======
+    "C:\\Users\\nelso\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512"
+>>>>>>> a900e8ee4019451822bb74b52fc444335ccf643e
+>>>>>>> c5311ff5b00b4eb6d1ee3e753ac2a05e5328884f
   ],
   "logs": []
 }

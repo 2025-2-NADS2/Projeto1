@@ -10,5 +10,6 @@ namespace Alma.Application.Interfaces.Repositorios
     public interface IInscricoesRepository
     {
         Task PostInscricao(Inscricoes inscricao);
+        Task<bool> ExisteInscricao(string usuarioId, int eventoId);
     }
 }

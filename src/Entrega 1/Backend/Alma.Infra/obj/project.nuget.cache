@@ -2,8 +2,9 @@
   "version": 2,
   "dgSpecHash": "VXENUadckS5PEdlsl9CfRlVzSiS/Aj2l/uf3Y9B9v84nZQUa4v5T8eo9H+MnKRAVbGa+djIh2rz6HyoFpe3g/w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Infra\\Alma.Infra.csproj",
+  "projectFilePath": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Infra\\Alma.Infra.csproj",
   "expectedPackageFiles": [
+<<<<<<< HEAD
     "C:\\Users\\25027686\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\25027686\\.nuget\\packages\\bouncycastle.cryptography\\2.6.1\\bouncycastle.cryptography.2.6.1.nupkg.sha512",
     "C:\\Users\\25027686\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

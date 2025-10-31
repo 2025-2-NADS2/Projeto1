@@ -12,6 +12,7 @@ namespace Alma.Application.Interfaces.Repositorios
     {
         Task<List<Evento>> GetAllEventosDisponiveis();
         Task<List<Evento>> GetEventos();
+        Task<Evento?> GetEventoById(int id);
         Task PostEvento(Evento evento);
         Task UpdateEvento(Evento evento);
     }

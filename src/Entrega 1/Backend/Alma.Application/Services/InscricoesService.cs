@@ -1,7 +1,5 @@
 ﻿using Alma.Application.Interfaces.Repositorios;
 using Alma.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace Alma.Application.Services
 {
@@ -16,17 +14,23 @@ namespace Alma.Application.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Guid> InscreverEvento(Guid eventoId, Guid userId)
+        public async Task<int> InscreverEvento(int eventoId, string usuarioId)
         {
+            if (eventoId <= 0) throw new ArgumentException("Evento inválido.");
+            if (string.IsNullOrWhiteSpace(usuarioId)) throw new ArgumentException("Usuário inválido.");
+
+            // evita duplicidade
+            if (await _inscricoesRepository.ExisteInscricao(usuarioId, eventoId))
+                throw new InvalidOperationException("Usuário já inscrito neste evento.");
+
             var inscricao = new Inscricoes
             {
-                Id = Guid.NewGuid(),
-                UserId = userId,
+                UsuarioId = usuarioId,
                 EventoId = eventoId,
-                DateCreated = DateTime.UtcNow
+                DataInscricao = DateTime.UtcNow
             };
 
-            _inscricoesRepository.PostInscricao(inscricao);
+            await _inscricoesRepository.PostInscricao(inscricao);
             await _unitOfWork.CommitAsync();
             
             return inscricao.Id;
