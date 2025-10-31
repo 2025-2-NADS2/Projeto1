@@ -1,12 +1,8 @@
 ﻿using Alma.Application.DTOs.Evento;
 using Alma.Application.Interfaces.Repositorios;
-using Alma.Application.Services;
-using Alma.Domain.DTOs.Usuario;
 using Alma.Domain.Entities;
 using Alma.Infra.Data;
-using Alma.Infra.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace Alma.API.Controller
 {
