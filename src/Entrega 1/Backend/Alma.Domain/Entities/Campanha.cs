@@ -7,8 +7,13 @@ namespace Alma.Domain.Entities
     [Table("campanhas_doacoes")]
     public class Campanha
     {
-        [Column("id")]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
+        public decimal? ValorArrecadado { get; set; }
+        public StatusCampanha StatusCampanha { get; set; }
+        public Guid? CreatedBy { get; set; }
+        public List<Doacao>? Doacoes { get; set; }
+        public string ImagemUrl { get; set; }
+
 
         [Column("titulo")]
         public string Titulo { get; set; }
@@ -25,11 +30,8 @@ namespace Alma.Domain.Entities
         [Column("data_fim")]
         public DateTime? DataFim { get; set; }
 
-        [Column("status")]
-        public string Status { get; set; }
-
         [Column("criado_em")]
-        public DateTime? CriadoEm { get; set; }
+        public DateTime? DateCreated { get; set; }
 
         [Column("atualizado_em")]
         public DateTime? AtualizadoEm { get; set; }

@@ -12,6 +12,9 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// ----------------------------
+// 💾 Configurar DbContext com MySQL
+// ----------------------------
 builder.Services.AddDbContext<AlmaDbContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
@@ -19,7 +22,9 @@ builder.Services.AddDbContext<AlmaDbContext>(options =>
     )
 );
 
-// Repositórios
+// ----------------------------
+// 🧱 Injeção de dependências
+// ----------------------------
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IEventoRepository, EventoRepository>();
 builder.Services.AddScoped<ICampanhaRepository, CampanhaRepository>();
@@ -27,13 +32,11 @@ builder.Services.AddScoped<IHistoriasRepository, HistoriasRepository>();
 builder.Services.AddScoped<IInscricoesRepository, InscricoesRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-// Serviços
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IEventoService, EventoService>();
 builder.Services.AddScoped<IInscricoesService, InscricoesService>();
 builder.Services.AddScoped<JwtTokenGenerator>();
 
-// Controllers e Razor Pages
 builder.Services.AddControllers();
 builder.Services.AddRazorPages(options =>
 {
@@ -41,13 +44,15 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AllowAnonymousToPage("/Index");
 });
 
-// Chave JWT
+// ----------------------------
+// 🔐 Configurar autenticação
+// ----------------------------
 var jwtKey = builder.Configuration["Jwt:Key"];
 if (string.IsNullOrWhiteSpace(jwtKey))
     throw new InvalidOperationException("Configuração 'Jwt:Key' ausente.");
+
 var secretKey = Encoding.UTF8.GetBytes(jwtKey);
 
-// Autenticação inteligente: JWT para API, Cookie para páginas
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = "Smart";
@@ -60,14 +65,14 @@ builder.Services.AddAuthentication(options =>
         // Se for API, usa JWT
         if (context.Request.Path.StartsWithSegments("/api"))
             return JwtBearerDefaults.AuthenticationScheme;
-        
-        // Se não for API, usa Cookie
+
+        // Caso contrário, usa Cookie
         return CookieAuthenticationDefaults.AuthenticationScheme;
     };
 })
 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
 {
-    options.LoginPath = "/Index"; // ou "/Login" se tiver página específica
+    options.LoginPath = "/Index";
     options.AccessDeniedPath = "/Index";
 })
 .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
@@ -81,12 +86,12 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(secretKey),
         ClockSkew = TimeSpan.Zero
     };
-    
+
     options.Events = new JwtBearerEvents
     {
         OnChallenge = context =>
         {
-            // Customizar mensagem de erro 401
+            // Customizar resposta 401
             context.HandleResponse();
             context.Response.StatusCode = 401;
             context.Response.ContentType = "application/json";
@@ -97,14 +102,37 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorization();
 
+// ----------------------------
+// 🚀 Construir o app
+// ----------------------------
 var app = builder.Build();
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
+// Middleware padrão
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+// ----------------------------
+// 🔑 Endpoint de Login (exemplo)
+// ----------------------------
+app.MapPost("/login", async (HttpContext context, IUsuarioRepository usuarioRepo, JwtTokenGenerator jwtGen) =>
+{
+    var body = await context.Request.ReadFromJsonAsync<LoginDto>();
+    var usuario = await usuarioRepo.AutenticarAsync(body.Email, body.Senha);
+
+    if (usuario == null)
+        return Results.Unauthorized();
+
+    var token = jwtGen.GenerateToken(usuario.Id, usuario.Email, usuario.Nome);
+
+    return Results.Ok(new { token });
+});
+
+// Controllers e páginas
 app.MapControllers();
 app.MapRazorPages();
 
 app.Run();
+
+// DTO temporário de login
+public record LoginDto(string Email, string Senha);

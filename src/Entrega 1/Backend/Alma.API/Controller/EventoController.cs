@@ -1,6 +1,7 @@
 ﻿using Alma.Application.DTOs.Evento;
 using Alma.Application.Interfaces.Repositorios;
 using Alma.Domain.Entities;
+using Alma.Infra.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Alma.API.Controller
