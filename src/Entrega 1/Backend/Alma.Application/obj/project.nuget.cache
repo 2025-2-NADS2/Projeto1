@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "2d1FuJHKAtg=",
+  "dgSpecHash": "cj+viUbF78x2CCQJ0Q+S4oeNjDjXkhhkOdIKykbIDKrVuJB416HLGSWYTA7/X7wUH9rRtQtn1UTCboYekovdig==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nelso\\Source\\Repos\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\Alma.Application.csproj",
+  "projectFilePath": "C:\\Users\\25027686\\Source\\Repos\\2025-2-NADS2\\Projeto1\\src\\Entrega 1\\Backend\\Alma.Application\\Alma.Application.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\nelso\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512"
+    "C:\\Users\\25027686\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512"
   ],
   "logs": []
 }
