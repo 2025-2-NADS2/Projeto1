@@ -67,6 +67,10 @@
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[8.14.0, )"
+            },
+            "mercadopago-sdk": {
+              "target": "Package",
+              "version": "[2.10.1, )"
             }
           },
           "imports": [
@@ -148,6 +152,10 @@
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[8.14.0, )"
+            },
+            "mercadopago-sdk": {
+              "target": "Package",
+              "version": "[2.10.1, )"
             }
           },
           "imports": [

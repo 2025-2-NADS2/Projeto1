@@ -15,5 +15,7 @@ namespace Alma.Domain.Entities
         public Guid UsuarioId { get; set; }
         public decimal Valor { get; set; }
         public DateTime Data { get; set; }
+        public StatusDoacao Status { get; set; }
+       
     }
 }
