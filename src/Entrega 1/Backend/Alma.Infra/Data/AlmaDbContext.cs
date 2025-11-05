@@ -12,6 +12,8 @@ namespace Alma.Infra.Data
         public DbSet<Historias> Historias { get; set; }
         public DbSet<Inscricoes> Inscricoes { get; set; }
         public DbSet<Doacao> Doacao { get; set; }
+        public DbSet<RelatorioTransparencia> RelatorioTransparencia { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,6 +26,7 @@ namespace Alma.Infra.Data
             modelBuilder.Entity<Historias>().ToTable("historias_destaque");
             modelBuilder.Entity<Inscricoes>().ToTable("inscricoes_eventos");
             modelBuilder.Entity<Doacao>().ToTable("donation");
+            modelBuilder.Entity<RelatorioTransparencia>().ToTable("relatorio_transparencia");
 
         }
     }

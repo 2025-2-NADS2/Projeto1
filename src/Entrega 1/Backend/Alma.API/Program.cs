@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Alma.Application.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,9 +33,21 @@ builder.Services.AddScoped<IHistoriasRepository, HistoriasRepository>();
 builder.Services.AddScoped<IInscricoesRepository, InscricoesRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+// Adicionar injeções para Doacao (assumindo que você tem IDoacaoRepository e DoacaoRepository)
+builder.Services.AddScoped<IDoacaoRepository, DoacaoRepository>();
+
+// Adicionar injeções para o download de relatórios (Transparência)
+builder.Services.AddScoped<IRelatorioTransparenciaRepository, TransparenciaRepository>();  // Assumindo que você tem essa interface e classe
+builder.Services.AddScoped<IRelatorioTransparenciaService, TransparenciaService>();      // Assumindo que você tem essa interface e classe
+
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IEventoService, EventoService>();
 builder.Services.AddScoped<IInscricoesService, InscricoesService>();
+// Adicionar serviço para Campanha (se faltava)
+builder.Services.AddScoped<ICampanhaService, CampanhaService>();
+// Adicionar serviço para Doacao (assumindo que você tem IDoacaoService e DoacaoService)
+builder.Services.AddScoped<IDoacaoService, DoacaoService>();
+
 builder.Services.AddScoped<JwtTokenGenerator>();
 
 builder.Services.AddControllers();
