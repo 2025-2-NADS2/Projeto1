@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/aspnetcore
-# Edit at https://www.toptal.com/developers/gitignore?templates=aspnetcore
+# Created by https://www.toptal.com/developers/gitignore/api/aspnetcore,dotnetcore
+# Edit at https://www.toptal.com/developers/gitignore?templates=aspnetcore,dotnetcore
 
 ### ASPNETCore ###
 ## Ignore Visual Studio temporary files, build results, and
@@ -271,4 +271,17 @@ __pycache__/
 # Cake - Uncomment if you are using it
 # tools/
 
-# End of https://www.toptal.com/developers/gitignore/api/aspnetcore
+### DotnetCore ###
+# .NET Core build folders
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.rsuser
+
+# Common node modules locations
+/node_modules
+/wwwroot/node_modules
+
+# End of https://www.toptal.com/developers/gitignore/api/aspnetcore,dotnetcore
