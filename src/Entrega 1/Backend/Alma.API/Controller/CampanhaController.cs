@@ -61,7 +61,7 @@ namespace Alma.API.Controller
             }
         }
 
-        [HttpPut("delete/campanha/{id: guid}")]
+        [HttpPut("delete/campanha/{id:guid}")]
         public async Task<IActionResult> DeleteCampanha(Guid id)
         {
             try
