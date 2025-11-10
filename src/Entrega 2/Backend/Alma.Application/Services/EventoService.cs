@@ -1,6 +1,10 @@
 ﻿using Alma.Application.DTOs.Evento;
 using Alma.Application.Interfaces.Repositorios;
 using Alma.Domain.Entities;
+using Alma.Domain.Enum;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Alma.Application.Services
 {
@@ -16,9 +20,7 @@ namespace Alma.Application.Services
         }
 
         public async Task<List<Evento>> GetTodosEventosDisponiveis()
-        {
-            return await _eventoRepository.GetAllEventosDisponiveis();
-        }
+            => await _eventoRepository.GetAllEventosDisponiveis();
 
         public async Task<int> CriarNovoEvento(NovoEventoDto dto)
         {
@@ -26,14 +28,13 @@ namespace Alma.Application.Services
 
             var evento = new Evento
             {
-                // Id será gerado pelo banco (IDENTITY) se configurado
                 Titulo = dto.Titulo,
                 Descricao = dto.Descricao,
                 DataEvento = dto.DataEvento,
                 Horario = dto.Horario,
                 Local = dto.Local,
-                Status = dto.Status ?? "ativo",
-                CriadoEm = DateTime.UtcNow,
+                Status = MapStatus(dto.Status),
+                CriadoEm = DateTime.UtcNow
             };
 
             await _eventoRepository.PostEvento(evento);
@@ -56,30 +57,37 @@ namespace Alma.Application.Services
             existente.DataEvento = dto.DataEvento;
             existente.Horario = dto.Horario;
             existente.Local = dto.Local;
-            existente.Status = dto.Status ?? existente.Status;
-            existente.AtualizadoEm = DateTime.UtcNow; // atualiza timestamp de atualização
-            // não altere CriadoEm aqui
+            if (!string.IsNullOrWhiteSpace(dto.Status))
+                existente.Status = MapStatus(dto.Status);
+            existente.AtualizadoEm = DateTime.UtcNow;
 
             await _eventoRepository.UpdateEvento(existente);
             await _unitOfWork.CommitAsync();
+        }
+
+        private static StatusEvento MapStatus(string? raw)
+        {
+            return raw?.ToLowerInvariant() switch
+            {
+                "finalizado" => StatusEvento.Finalizado,
+                "cancelado"  => StatusEvento.Cancelado,
+                _            => StatusEvento.Planejado
+            };
         }
 
         private static void Validate(NovoEventoDto dto)
         {
             if (string.IsNullOrWhiteSpace(dto.Titulo))
                 throw new ArgumentException("Título é obrigatório.");
-
             if (string.IsNullOrWhiteSpace(dto.Descricao))
                 throw new ArgumentException("Descrição é obrigatória.");
-
             if (dto.DataEvento == default)
                 throw new ArgumentException("Data do evento é obrigatória.");
-
-            if (dto.Horario.HasValue && (dto.Horario.Value < TimeSpan.Zero || dto.Horario.Value >= TimeSpan.FromDays(1)))
-                throw new ArgumentException("Horário do evento é inválido.");
-
             if (string.IsNullOrWhiteSpace(dto.Local))
                 throw new ArgumentException("Local do evento é obrigatório.");
+            if (dto.Horario.HasValue &&
+                (dto.Horario.Value < TimeSpan.Zero || dto.Horario.Value >= TimeSpan.FromDays(1)))
+                throw new ArgumentException("Horário inválido.");
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Alma.Application.DTOs
 {
     public class DoacaoDto
     {
-        public Guid CampanhaId { get; set; }
+        public int CampanhaId { get; set; }
         public decimal Valor { get; set; }
     }
 }

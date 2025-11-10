@@ -1,31 +1,39 @@
-﻿using Alma.Infra.Data;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Alma.Application.Interfaces.Repositorios;
+using Alma.Domain.Entities;
+using Alma.Infra.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
 
-public class TransparenciaRepository : IRelatorioTransparenciaRepository
+namespace Alma.Infra.Repositories
 {
-    private readonly AlmaDbContext _context;
-
-    public TransparenciaRepository(AlmaDbContext context)
+    public class TransparenciaRepository : IRelatorioTransparenciaRepository
     {
-        _context = context;
-    }
+        private readonly AlmaDbContext _context;
 
-    public async Task<IEnumerable<RelatorioTransparencia>> List()
-    {
-        return await _context.RelatorioTransparencia
-            .OrderByDescending(r => r.DataPublicacao)
-            .ToListAsync();
-    }
+        public TransparenciaRepository(AlmaDbContext context)
+        {
+            _context = context;
+        }
 
-    public async Task Adicionar(RelatorioTransparencia relatorio)
-    {
-        await _context.RelatorioTransparencia.AddAsync(relatorio);
-        await _context.SaveChangesAsync();
-    }
+        public async Task<IEnumerable<RelatorioTransparencia>> List()
+        {
+            return await _context.RelatoriosTransparencia
+                .OrderByDescending(r => r.DataPublicacao)
+                .ToListAsync();
+        }
 
-    public async Task<RelatorioTransparencia> GetById(Guid id)
-    {
-        return _context.RelatorioTransparencia.FirstOrDefault(x => x.Id == id);
+        public async Task Adicionar(RelatorioTransparencia relatorio)
+        {
+            await _context.RelatoriosTransparencia.AddAsync(relatorio);
+            await _context.SaveChangesAsync(); // mantém padrão atual deste repo
+        }
+
+        public async Task<RelatorioTransparencia?> GetById(int id)
+        {
+            return await _context.RelatoriosTransparencia
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }

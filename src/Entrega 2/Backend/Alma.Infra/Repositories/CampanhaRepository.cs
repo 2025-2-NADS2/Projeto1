@@ -1,47 +1,54 @@
 ﻿using Alma.Application.Interfaces.Repositorios;
 using Alma.Domain.Entities;
+using Alma.Domain.Enum;
 using Alma.Infra.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Alma.Infra.Repositories
 {
     public class CampanhaRepository : BaseRepository<Campanha>, ICampanhaRepository
     {
         private readonly AlmaDbContext _context;
-        public CampanhaRepository(AlmaDbContext context) : base(context) 
+
+        public CampanhaRepository(AlmaDbContext context) : base(context)
         {
             _context = context;
-
         }
 
         public async Task<List<Campanha>> GetAllCampanhasDisponiveis()
         {
-            var now = DateTime.UtcNow; // usa UTC para consistência
-            return _context.Campanhas
+            return await _context.Campanhas
                 .AsNoTracking()
-                .Where(e => e.StatusCampanha != Domain.Enum.StatusCampanha.FINALIZADA)
-                .OrderBy(e => e.DateCreated)
-                .ToList();
+                .Where(e => e.Status != StatusCampanha.Finalizada)
+                .OrderBy(e => e.CriadoEm)
+                .ToListAsync();
+        }
+
+        public async Task<Campanha?> GetCampanhaByIdAsync(int id)
+        {
+            return await _context.Campanhas
+                .Include(c => c.Doacoes)
+                .FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task PostCampanha(Campanha campanha)
         {
-            _context.Campanhas.AddAsync(campanha);
+            await _context.Campanhas.AddAsync(campanha);
         }
 
-        public async Task UpdateCampanha(Campanha campanha)
+        public Task UpdateCampanha(Campanha campanha)
         {
             _context.Campanhas.Update(campanha);
+            return Task.CompletedTask;
         }
 
-        public async Task DeleteCampanha(Campanha campanha)
+        public Task DeleteCampanha(Campanha campanha)
         {
             _context.Campanhas.Remove(campanha);
-        }
-        public async Task<Campanha> GetCampanhaById(Guid id)
-        {
-            return _context.Campanhas
-                .FirstOrDefault(e => e.Id == id);
+            return Task.CompletedTask;
         }
     }
 }

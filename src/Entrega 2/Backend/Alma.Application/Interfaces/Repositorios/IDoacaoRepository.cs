@@ -1,9 +1,14 @@
 ﻿using Alma.Domain.Entities;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-public interface IDoacaoRepository
+namespace Alma.Application.Interfaces.Repositorios
 {
-    Task<Doacao> ObterPorId(Guid id);
-    Task<IEnumerable<Doacao>> ObterPorCampanha(Guid campanhaId);
-    Task Adicionar(Doacao doacao);
-    Task Atualizar(Doacao doacao);
+    public interface IDoacaoRepository
+    {
+        Task<Doacao?> ObterPorId(int id);
+        Task<IEnumerable<Doacao>> ObterPorCampanha(int campanhaId);
+        Task Adicionar(Doacao doacao);
+        Task Atualizar(Doacao doacao);
+    }
 }

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Alma.Domain.Enum;
 
-namespace Alma.Domain.Enum
+// Representa valores possíveis do enum no banco: 'ativa', 'finalizada'
+public enum StatusCampanha
 {
-    public enum StatusCampanha
-    {
-        FINALIZADA = 0,
-        EM_PROGRESSO = 1,
-    }
+    Ativa = 1,
+    Finalizada = 2
 }

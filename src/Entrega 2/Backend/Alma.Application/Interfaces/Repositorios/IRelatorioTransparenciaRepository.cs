@@ -1,6 +1,13 @@
-﻿public interface IRelatorioTransparenciaRepository
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Alma.Domain.Entities;
+
+namespace Alma.Application.Interfaces.Repositorios
 {
-    Task Adicionar(RelatorioTransparencia relatorio);
-    Task<IEnumerable<RelatorioTransparencia>> List();
-    Task<RelatorioTransparencia> GetById(Guid id);
+    public interface IRelatorioTransparenciaRepository
+    {
+        Task Adicionar(RelatorioTransparencia relatorio);
+        Task<IEnumerable<RelatorioTransparencia>> List();
+        Task<RelatorioTransparencia?> GetById(int id);
+    }
 }

@@ -7,8 +7,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Alma.Application\Alma.Application.csproj" />
 		<ProjectReference Include="..\Alma.Domain\Alma.Domain.csproj" />
+		<ProjectReference Include="..\Alma.Application\Alma.Application.csproj" />
 		<PackageReference Include="MailKit" Version="4.14.1" />
 		<PackageReference Include="mercadopago-sdk" Version="2.10.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.21" />

@@ -1,9 +1,8 @@
 ﻿using Alma.Application.DTOs.Campanha;
-using Alma.Application.DTOs.Evento;
 using Alma.Application.Interfaces.Repositorios;
-using Alma.Domain.Entities;
-using Alma.Infra.Data;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace Alma.API.Controller
 {
@@ -11,69 +10,39 @@ namespace Alma.API.Controller
     [Route("api/[controller]")]
     public class CampanhaController : ControllerBase
     {
-        private readonly AlmaDbContext _context;
         private readonly ICampanhaService _campanhaService;
-        public CampanhaController(AlmaDbContext context, ICampanhaService campanhaService)
+
+        public CampanhaController(ICampanhaService campanhaService)
         {
-            _context = context;
             _campanhaService = campanhaService;
         }
 
-        [HttpGet("get/campanha")]
-        public async Task<ActionResult<List<Evento>>> GetTodasCampanhasDisponiveis()
+        [HttpGet("listar")]
+        public async Task<IActionResult> GetTodasCampanhasDisponiveis()
         {
-            try
-            {
-                var eventos = await _campanhaService.GetTodasCampanhasDisponiveis();
-                return Ok(eventos);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Erro interno ao buscar campanha: {ex.Message}");
-            }
+            var campanhas = await _campanhaService.GetTodasCampanhasDisponiveis();
+            return Ok(campanhas);
         }
 
-        [HttpPost("post/novo/campanha")]
+        [HttpPost("criar")]
         public async Task<IActionResult> CriarNovaCampanha([FromBody] NovaCampanhaDto dto)
         {
-            try
-            {
-                await _campanhaService.CriarNovaCampanha(dto);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { mensagem = "Erro interno no servidor.", detalhe = ex.Message });
-            }
-        }
-        
-        [HttpPut("put/update/campanha")]
-        public async Task<IActionResult> AtualizaCampanha([FromBody] NovaCampanhaDto dto)
-        {
-            try
-            {
-                await _campanhaService.UpdateCampanha(dto);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { mensagem = "Erro interno no servidor.", detalhe = ex.Message });
-            }
+            var id = await _campanhaService.CriarNovaCampanha(dto);
+            return Ok(new { id });
         }
 
-        [HttpPut("delete/campanha/{id:guid}")]
-        public async Task<IActionResult> DeleteCampanha(Guid id)
+        [HttpPut("atualizar")]
+        public async Task<IActionResult> AtualizarCampanha([FromBody] NovaCampanhaDto dto)
         {
-            try
-            {
-                await _campanhaService.DeleteCampanha(id);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { mensagem = "Erro interno no servidor.", detalhe = ex.Message });
-            }
+            await _campanhaService.UpdateCampanha(dto);
+            return Ok();
         }
 
+        [HttpDelete("excluir/{id:int}")]
+        public async Task<IActionResult> DeleteCampanha(int id)
+        {
+            await _campanhaService.DeleteCampanha(id);
+            return Ok();
+        }
     }
 }

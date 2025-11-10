@@ -1,5 +1,4 @@
 ﻿using Alma.Application.Interfaces;
-using Alma.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,15 +40,13 @@ public class RelatorioTransparenciaController : ControllerBase
     /// <summary>
     /// Faz o download de um relatório específico
     /// </summary>
-    [HttpGet("download/{id}")]
-    public async Task<IActionResult> Download(Guid id)
+    [HttpGet("download/{id:int}")]
+    public async Task<IActionResult> Download(int id)
     {
         var resultado = await _transparenciaService.ObterRelatorioParaDownload(id);
-
         if (resultado.CaminhoArquivo == null)
             return NotFound("Relatório não encontrado.");
 
-        // Usar PhysicalFile para streaming direto do disco, sem carregar na memória
         return PhysicalFile(resultado.CaminhoArquivo, "application/pdf", resultado.NomeArquivo);
     }
 }

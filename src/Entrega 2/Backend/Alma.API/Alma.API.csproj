@@ -12,13 +12,12 @@
     <PackageReference Include="mercadopago-sdk" Version="2.10.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.21" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.20" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Alma.Application\Alma.Application.csproj" />
     <ProjectReference Include="..\Alma.Infra\Alma.Infra.csproj" />
+    <ProjectReference Include="..\Alma.Application\Alma.Application.csproj" />
   </ItemGroup>
 
 </Project>

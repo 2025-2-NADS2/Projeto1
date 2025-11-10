@@ -8,7 +8,7 @@ namespace Alma.Application.Interfaces
 {
     public interface IDoacaoService
     {
-        Task ConfirmarDoacaoAsync(Guid doacaoId);
-        Task<string> CriarSessaoPagamentoAsync(Guid campanhaId, decimal valor);
+        Task ConfirmarDoacaoAsync(int doacaoId);
+        Task<string> CriarSessaoPagamentoAsync(int campanhaId, decimal valor);
     }
 }
