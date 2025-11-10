@@ -1,0 +1,117 @@
+/* ================================
+   Popup de Pagamento Pix (ajustado)
+================================ */
+.pix-popup-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* faz o popup começar mais abaixo */
+    padding-top: 6rem; /* distância do topo (para o header) */
+    z-index: 999;
+    animation: fadeIn 0.3s ease forwards;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .pix-popup-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    width: 85%;
+    max-width: 360px; /* menor que antes */
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    animation: slideUp 0.4s ease forwards;
+  }
+  
+  @keyframes slideUp {
+    from { transform: translateY(40px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  .pix-popup-fechar {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 1.8em;
+    color: #444;
+    cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
+  }
+  
+  .pix-popup-fechar:hover {
+    transform: scale(1.1);
+    color: #000;
+  }
+  
+  .pix-popup-titulo {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    color: #222;
+    font-weight: bold;
+  }
+  
+  .pix-popup-conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .pix-popup-qrcode {
+    width: 200px;
+    height: 200px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 12px;
+  }
+  
+  .pix-popup-valor {
+    font-size: 1em;
+    font-weight: bold;
+    color: #2b7a2b;
+    margin-bottom: 12px;
+  }
+  
+  .pix-popup-codigo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .pix-codigo-textarea {
+    width: 100%;
+    height: 70px;
+    resize: none;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 8px;
+    font-size: 0.9em;
+    color: #333;
+    background-color: #fafafa;
+  }
+  
+  .pix-botao-copiar {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .pix-botao-copiar:hover {
+    background-color: #43a047;
+  }
+  
