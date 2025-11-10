@@ -5,15 +5,19 @@ import icon_1 from "../../assets/donate/icon_1.png";
 import icon_2 from "../../assets/donate/icon_2.png";
 import icon_3 from "../../assets/donate/icon_3.png";
 
+// Componente principal da página de doações
 export default function Donation({ onBack, onDonatePortal }) {
+  // Referência para a seção de cards, usada para rolar a página
   const cardsRef = useRef(null);
 
+  // Função para rolar suavemente até a seção de cards
   const handleScrollToCards = () => {
     cardsRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <div className="donation-page">
+      {/* SEÇÃO HERO: Cabeçalho principal da página */}
       <Overlay className="hero-section">
         <div className="hero-content">
           <h1 className="titulo-donate">NOS AJUDE EM NOSSA MISSÃO</h1>
@@ -23,7 +27,7 @@ export default function Donation({ onBack, onDonatePortal }) {
         </div>
       </Overlay>
 
-      {/* META */}
+      {/* META: Exibe o valor arrecadado e a barra de progresso */}
       <section className="goal-section">
         <h2 className="goal-amount">$150,000</h2>
 
@@ -39,7 +43,7 @@ export default function Donation({ onBack, onDonatePortal }) {
         </div>
       </section>
 
-      {/* OPÇÕES DE DOAÇÃO */}
+      {/* OPÇÕES DE DOAÇÃO: Mostra os tipos de contribuição */}
       <div className="donation-options">
         <div className="donation-box">
           <div className="donation-img-slot">❤️</div>
@@ -75,7 +79,7 @@ export default function Donation({ onBack, onDonatePortal }) {
         </div>
       </div>
 
-      {/* CARDS */}
+      {/* CARDS: Mostra as categorias de ações com ícones e descrições */}
       <section className="categories" ref={cardsRef}>
         {/* ÁGUA LIMPA */}
         <article className="category-card pink">

@@ -1,21 +1,23 @@
-/* Variáveis de Cores (Ajuste conforme a identidade visual) */
+/* ================================
+    Variáveis Gerais
+================================ */
 :root {
-    --cor-principal-fundo: #f8f7f0;
-    --cor-aba-ativa: #8bc34a;
-    --cor-texto-escuro: #333;
-    --cor-texto-claro: #fff;
-    --cor-card-fundo: #fff;
-    --cor-data-fundo: #5bc0de;
+    --card-radius: 8px;
+    --shadow-strong: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-/* Base da Página */
+/* ================================
+    Base da Página
+================================ */
 .pagina-eventos {
     font-family: Arial, sans-serif;
-    background-color: var(--cor-principal-fundo);
-    color: var(--cor-texto-escuro);
+    background-color: #f8f7f0;
+    color: #333333;
 }
 
-/* --- 1. Header com Imagem de Fundo --- */
+/* ================================
+    Header com Imagem de Fundo
+================================ */
 .header-eventos {
     background-size: cover;
     background-position: center;
@@ -25,7 +27,7 @@
     justify-content: center;
     text-align: center;
     position: relative;
-    color: var(--cor-texto-claro);
+    color: #ffffff;
 }
 
 .header-overlay {
@@ -61,19 +63,21 @@
 }
 
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    0%,20%,50%,80%,100% { transform: translateY(0); }
     40% { transform: translateY(-10px); }
     60% { transform: translateY(-5px); }
 }
 
-/* --- 2. Seção Principal de Eventos --- */
+/* ================================
+    Seção Principal de Eventos
+================================ */
 .eventos-secao {
     padding: 40px 20px;
     max-width: 1200px;
     margin: -50px auto 0;
-    background-color: var(--cor-card-fundo);
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow-strong);
     position: relative;
     z-index: 10;
 }
@@ -82,7 +86,7 @@
     display: flex;
     gap: 10px;
     margin-bottom: 30px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #eeeeee;
     padding-bottom: 10px;
     width: fit-content;
 }
@@ -93,14 +97,14 @@
     padding: 8px 15px;
     cursor: pointer;
     font-weight: 600;
-    color: #999;
+    color: #999999;
     border-radius: 4px 4px 0 0;
     transition: all 0.3s;
     position: relative;
 }
 
 .aba-botao.ativa {
-    color: var(--cor-texto-escuro);
+    color: #333333;
     font-weight: bold;
 }
 
@@ -111,7 +115,7 @@
     left: 0;
     width: 100%;
     height: 3px;
-    background-color: var(--cor-aba-ativa);
+    background-color: #8bc34a;
     border-radius: 2px 2px 0 0;
 }
 
@@ -120,7 +124,7 @@
     margin-bottom: 40px;
     font-size: 1.5em;
     font-weight: 400;
-    color: #666;
+    color: #666666;
 }
 
 .cards-eventos-container {
@@ -132,16 +136,18 @@
 .mensagem-vazio {
     grid-column: 1 / -1;
     text-align: center;
-    color: #999;
+    color: #999999;
     padding: 30px;
 }
 
-/* Card de Evento */
+/* ================================
+    Card de Evento
+================================ */
 .evento-card {
-    background-color: var(--cor-card-fundo);
-    border-radius: 8px;
+    background-color: #ffffff;
+    border-radius: var(--card-radius);
     overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     transition: transform 0.3s;
     position: relative;
     border: 1px solid #f0f0f0;
@@ -149,7 +155,7 @@
 
 .evento-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
 }
 
 .evento-imagem {
@@ -160,60 +166,41 @@
     position: relative;
 }
 
-/* Data no Canto Superior Esquerdo */
 .evento-data {
     position: absolute;
     top: 15px;
     left: 15px;
-    background-color: var(--cor-data-fundo);
-    color: var(--cor-texto-claro);
+    background-color: #5bc0de;
+    color: #ffffff;
     padding: 10px;
-    border-radius: 8px;
+    border-radius: var(--card-radius);
     text-align: center;
     font-weight: bold;
     line-height: 1;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-.evento-data .dia {
-    display: block;
-    font-size: 1.5em;
-}
+.evento-data .dia { display: block; font-size: 1.5em; }
+.evento-data .mes { display: block; font-size: 0.9em; text-transform: uppercase; }
 
-.evento-data .mes {
-    display: block;
-    font-size: 0.9em;
-    text-transform: uppercase;
-}
-
-.evento-info {
-    padding: 15px;
-}
-
-.nome-evento {
-    font-size: 1.1em;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.local-evento {
-    color: #666;
-    font-size: 0.9em;
-    margin-bottom: 15px;
-}
+.evento-info { padding: 15px; }
+.nome-evento { font-size: 1.1em; margin-bottom: 5px; font-weight: bold; }
+.local-evento { color: #666666; font-size: 0.9em; margin-bottom: 15px; }
 
 .evento-icones-sociais i {
     margin-right: 10px;
-    color: #999;
+    color: #999999;
     cursor: pointer;
     transition: color 0.2s;
 }
 
 .evento-icones-sociais i:hover {
-    color: var(--cor-aba-ativa);
+    color: #8bc34a;
 }
 
-/* --- 3. Seção de Redes Sociais --- */
+/* ================================
+    Seção de Redes Sociais
+================================ */
 .social-secao {
     padding: 60px 20px;
     max-width: 1200px;
@@ -225,20 +212,18 @@
     font-size: 1.5em;
     font-weight: 500;
     margin-bottom: 40px;
-    color: #444;
+    color: #444444;
 }
 
-/* Grid visível desde o início */
 .social-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 15px;
 }
 
-/* Cada post */
 .social-post-item {
     position: relative;
-    border-radius: 8px;
+    border-radius: var(--card-radius);
     overflow: hidden;
     background-color: #e0e0e0;
     padding-bottom: 100%;
@@ -246,7 +231,6 @@
     transition: opacity 0.3s;
 }
 
-/* Loader (skeleton) enquanto carrega */
 .social-post-item::before {
     content: "";
     position: absolute;
@@ -271,11 +255,10 @@
     z-index: 1;
 }
 
-/* Overlay */
 .social-post-overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.35);
+    background-color: rgba(0,0,0,0.35);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -284,16 +267,16 @@
     z-index: 2;
 }
 
-.social-post-item:hover .social-post-overlay {
-    opacity: 1;
-}
+.social-post-item:hover .social-post-overlay { opacity: 1; }
 
 .social-post-overlay i {
-    color: var(--cor-texto-claro);
+    color: #ffffff;
     font-size: 2em;
 }
 
-/* Responsividade */
+/* ================================
+    Responsividade
+================================ */
 @media (max-width: 768px) {
     .header-titulo { font-size: 2em; }
     .eventos-secao {
@@ -304,12 +287,14 @@
     .social-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* --- POPUP DE DETALHES --- */
+/* ================================
+    Popup de Detalhes
+================================ */
 .popup-overlay {
     position: fixed;
     top: 0; left: 0;
     width: 100vw; height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0,0,0,0.7);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -318,39 +303,33 @@
     backdrop-filter: blur(5px);
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 .popup-container {
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 12px;
     max-width: 800px;
     width: 90%;
     overflow: hidden;
     position: relative;
     animation: slideUp 0.4s ease forwards;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
-@keyframes slideUp {
-    from { transform: translateY(40px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
+@keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
 .popup-fechar {
     position: absolute;
     top: 10px; right: 15px;
     background: none; border: none;
     font-size: 2em;
-    color: #444;
+    color: #444444;
     cursor: pointer;
     transition: transform 0.2s, color 0.2s;
 }
 
 .popup-fechar:hover {
-    color: #000;
+    color: #000000;
     transform: scale(1.1);
 }
 
@@ -368,16 +347,9 @@
 .popup-conteudo h2 {
     font-size: 1.8em;
     margin-bottom: 10px;
-    color: #333;
+    color: #333333;
 }
 
-.popup-conteudo p {
-    margin-bottom: 8px;
-    color: #555;
-}
+.popup-conteudo p { margin-bottom: 8px; color: #555555; }
 
-.popup-descricao {
-    margin-top: 15px;
-    line-height: 1.5;
-    color: #444;
-}
+.popup-descricao { margin-top: 15px; line-height: 1.5; color: #444444; }

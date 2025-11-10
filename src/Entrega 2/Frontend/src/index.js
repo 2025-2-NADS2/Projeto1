@@ -88,6 +88,7 @@ function Root() {
         onSobreClick={() => setCurrentPage("sobre")}
         onDonateClick={() => setCurrentPage("donate")}
         onTransparenciaClick={() => setCurrentPage("transparencia")}
+        onVoluntarieClick={() => setCurrentPage("voluntariado")}
       />
     </>
   );

@@ -17,13 +17,13 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'axiforma_light', sans-serif; /* Fonte padrão */
+  font-family: 'axiforma_light', sans-serif;
 }
 
 body {
   background: var(--bg);
   color: #111;
-  padding-top: 5rem; /* Para não ficar atrás do header */
+  padding-top: 5rem; 
 }
 
 .volunteer-page {

@@ -3,14 +3,21 @@ import axios from 'axios';
 import "../../style/eventos.css";
 import Overlay from "../components/overlay.jsx";
 
+// Componente principal da página de eventos
 const Eventos = () => {
+  // Estado para armazenar a lista de eventos do backend
   const [eventos, setEventos] = useState([]);
+  // Estado para controlar qual aba está ativa (próximos ou realizados)
   const [abaAtiva, setAbaAtiva] = useState('proximos');
+  // Estado para armazenar posts simulados das redes sociais
   const [socialPosts, setSocialPosts] = useState([]);
+  // Estado para controlar qual evento está selecionado no popup
   const [eventoSelecionado, setEventoSelecionado] = useState(null);
 
+  // URL da API de eventos
   const EVENTOS_API_URL = 'http://localhost:5000/api/evento/get/eventos';
 
+  // Busca os eventos do backend quando o componente é montado
   useEffect(() => {
     const fetchEventos = async () => {
       try {
@@ -23,7 +30,7 @@ const Eventos = () => {
     fetchEventos();
   }, []);
 
-  // 💬 Aqui você só troca os links dos posts
+  // Links simulados de posts nas redes sociais
   const INSTAGRAM_POSTS = [
     "https://www.instagram.com/p/C8ZxqzFux6I",
     "https://www.instagram.com/p/POST_ID_2/",
@@ -33,11 +40,11 @@ const Eventos = () => {
   const FACEBOOK_POSTS = [
     "https://www.facebook.com/POST_LINK_1",
     "https://www.facebook.com/POST_LINK_2",
-    "https://www.facebook.com/POST_LINK_3",
+    "https://www.facebook.com/POST_LINK_3/",
   ];
 
+  // Cria posts simulados com imagens e ícones para exibição
   useEffect(() => {
-    // Simula visual de cada rede com imagem e ícone
     const posts = [
       ...INSTAGRAM_POSTS.map((link, i) => ({
         id: `insta-${i}`,
@@ -57,22 +64,26 @@ const Eventos = () => {
     setSocialPosts(posts);
   }, []);
 
+  // Função para gerar objeto Date completo a partir de data e horário
   const getFullDateTime = (dataEvento, horario) => {
     const datePart = dataEvento.split('T')[0];
     const fullDateTimeString = `${datePart}T${horario}`;
     return new Date(fullDateTimeString);
   };
 
+  // Verifica se o evento já passou
   const isEventoPassado = (dataEvento, horario) => {
     const dataCompleta = getFullDateTime(dataEvento, horario);
     return dataCompleta < new Date();
   };
 
+  // Filtra os eventos com base na aba ativa
   const eventosFiltrados = eventos.filter(evento => {
     const isPassado = isEventoPassado(evento.dataEvento, evento.horario);
     return abaAtiva === 'realizados' ? isPassado : !isPassado;
   });
 
+  // Card individual de cada evento
   const EventoCard = ({ evento }) => {
     const { titulo, dataEvento, horario, local } = evento;
     const dataCompleta = getFullDateTime(dataEvento, horario);
@@ -85,15 +96,15 @@ const Eventos = () => {
         className={`evento-card ${realizado ? 'realizado-card' : 'proximo-card'}`}
         onClick={() => setEventoSelecionado(evento)}
       >
-        <div
-          className="evento-imagem"
-          style={{ backgroundImage: 'url(https://placehold.co/500x300/d4afb9/ffffff?text=Foto+Evento)' }}
-        >
+        {/* Imagem do evento com data sobreposta */}
+        <Overlay className="evento-imagem">
           <div className="evento-data">
             <span className="dia">{dia}</span>
             <span className="mes">{mes}</span>
           </div>
-        </div>
+        </Overlay>
+
+        {/* Informações do evento */}
         <div className="evento-info">
           <p className="nome-evento">{titulo.toUpperCase()}</p>
           <p className="local-evento">Local: {local}</p>
@@ -107,6 +118,7 @@ const Eventos = () => {
 
   return (
     <div className="pagina-eventos">
+      {/* Cabeçalho com Overlay */}
       <div className="header-eventos">
         <Overlay className="header-overlay">
           <h1 className="header-titulo">NOSSOS EVENTOS</h1>
@@ -116,6 +128,7 @@ const Eventos = () => {
         </Overlay>
       </div>
 
+      {/* Seção de eventos com abas */}
       <div className="eventos-secao">
         <div className="abas-container">
           <button
@@ -134,6 +147,7 @@ const Eventos = () => {
 
         <h2 className="secao-titulo">Encontros e ações que inspiram mudanças</h2>
 
+        {/* Lista de cards de eventos */}
         <div className="cards-eventos-container">
           {eventosFiltrados.length > 0 ? (
             eventosFiltrados
@@ -149,6 +163,7 @@ const Eventos = () => {
         </div>
       </div>
 
+      {/* Seção de redes sociais com posts simulados */}
       <div className="social-secao">
         <h2 className="social-titulo">siga-nos nas redes sociais</h2>
         <div className="social-grid">
@@ -170,6 +185,7 @@ const Eventos = () => {
         </div>
       </div>
 
+      {/* Popup com detalhes do evento selecionado */}
       {eventoSelecionado && (
         <div className="popup-overlay" onClick={() => setEventoSelecionado(null)}>
           <div className="popup-container" onClick={(e) => e.stopPropagation()}>

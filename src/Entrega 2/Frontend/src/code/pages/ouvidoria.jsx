@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "../../style/ouvidoria.css";
 
+// Ícones SVG
 const InfoIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="10" />
@@ -17,6 +18,7 @@ const CloseIcon = ({ onClick }) => (
 );
 
 const Ouvidoria = ({ onBack }) => {
+  // Estado do formulário
   const [formData, setFormData] = useState({
     cpf: '',
     telefone: '',
@@ -25,19 +27,26 @@ const Ouvidoria = ({ onBack }) => {
     mensagem: '',
     aceitePrivacidade: false,
   });
+
+  // Estado de status da submissão
   const [status, setStatus] = useState('');
+
+  // Estado de loading enquanto envia
   const [loading, setLoading] = useState(false);
 
   const API_BASE = "http://localhost:5000/api/Ouvidoria";
 
+  // Atualiza os campos do formulário
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
   };
 
+  // Submissão do formulário
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Valida campos obrigatórios
     if (!formData.assunto || !formData.mensagem) {
       setStatus('⚠️ Por favor, preencha o Assunto e a Mensagem.');
       return;
@@ -77,6 +86,7 @@ const Ouvidoria = ({ onBack }) => {
 
       if (response.ok) {
         setStatus('✅ Mensagem enviada com sucesso!');
+        // Limpa o formulário após envio
         setFormData({
           cpf: '',
           telefone: '',
@@ -101,6 +111,7 @@ const Ouvidoria = ({ onBack }) => {
   return (
     <div className="ouvidoria-container">
       <div className="ouvidoria-box">
+        {/* Cabeçalho */}
         <header className="ouvidoria-header">
           <div className="title-group">
             <InfoIcon />
@@ -109,10 +120,12 @@ const Ouvidoria = ({ onBack }) => {
           <CloseIcon onClick={onBack} />
         </header>
 
+        {/* Descrição */}
         <p className="ouvidoria-desc">
           Deixe suas <strong>críticas, dúvidas ou sugestões</strong> sobre o nosso trabalho.
         </p>
 
+        {/* Formulário */}
         <form onSubmit={handleSubmit} className="ouvidoria-form">
           <input
             type="text"
@@ -152,6 +165,7 @@ const Ouvidoria = ({ onBack }) => {
             required
           />
 
+          {/* Checkbox de privacidade */}
           <div className="privacidade">
             <input
               type="checkbox"
@@ -167,8 +181,10 @@ const Ouvidoria = ({ onBack }) => {
             </label>
           </div>
 
+          {/* Status da submissão */}
           {status && <p className="status">{status}</p>}
 
+          {/* Botão enviar */}
           <button type="submit" disabled={loading || !formData.aceitePrivacidade}>
             {loading ? 'ENVIANDO...' : 'ENVIAR'}
           </button>

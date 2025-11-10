@@ -1,24 +1,41 @@
+/* ================================
+    Variáveis Globais
+================================ */
 :root {
-  --color-primary: #1e5e6e;
-  --color-primary-dark: #0f4f48;
-  --color-accent: #4f46e5;
-  --color-bg: #f9fafb;
-  --color-white: #ffffff;
-  --color-gray: #6b7280;
-  --color-gray-light: #f3f4f6;
-  --color-dark: #111827;
+  --overlay: 
+    radial-gradient(circle at 20% 30%, #00A870, transparent 60%),
+    radial-gradient(circle at 70% 60%, #008388, transparent 60%),
+    #004851;
+}
+
+/* ================================
+    Reset e Body
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  background-color: #f9fafb;
+  color: #111827;
+  overflow-x: hidden;
 }
 
 .donation-container {
   min-height: 100vh;
-  background-color: var(--color-bg);
+  background-color: #f9fafb;
 }
 
-/* HERO */
+/* ================================
+    Hero Section
+================================ */
 .hero-section-doacao {
   top: 5rem;
   background: var(--overlay);
-  color: var(--color-white);
+  color: #ffffff;
   text-align: center;
   padding: 5rem 1rem;
 }
@@ -34,7 +51,9 @@
   opacity: 0.9;
 }
 
-/* FORM SECTION */
+/* ================================
+    Form Section
+================================ */
 .donation-form-section {
   display: flex;
   justify-content: center;
@@ -44,11 +63,11 @@
 
 .donation-card {
   position: relative;
-  margin-top: 2rem; 
+  margin-top: 2rem;
   background-color: #ffffff;
   border: 2px solid #e0e0e0;
   border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   padding: 30px;
   width: 380px;
   transition: all 0.3s ease;
@@ -69,8 +88,8 @@
 .icon-box {
   width: 50px;
   height: 50px;
-  background-color: var(--color-primary);
-  color: var(--color-white);
+  background-color: #1e5e6e;
+  color: #ffffff;
   border-radius: 0.75rem;
   display: flex;
   justify-content: center;
@@ -79,14 +98,14 @@
 
 .donation-header h2 {
   font-size: 1.5rem;
-  color: var(--color-dark);
+  color: #111827;
   font-weight: 700;
 }
 
 .donation-form label {
   display: block;
   font-weight: 600;
-  color: var(--color-dark);
+  color: #111827;
   margin-bottom: 0.5rem;
 }
 
@@ -94,24 +113,24 @@
 .donation-form select {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 1px solid var(--color-gray-light);
+  border: 1px solid #f3f4f6;
   border-radius: 0.5rem;
   margin-bottom: 1.5rem;
   font-size: 1rem;
-  background: var(--color-bg);
+  background: #f9fafb;
   transition: all 0.2s;
 }
 
 .donation-form input:focus,
 .donation-form select:focus {
-  border-color: var(--color-primary);
+  border-color: #1e5e6e;
   outline: none;
-  box-shadow: 0 0 0 2px rgba(30, 94, 110, 0.2);
+  box-shadow: 0 0 0 2px rgba(30,94,110,0.2);
 }
 
 .donate-btn {
-  background: var(--color-accent);
-  color: var(--color-white);
+  background: #4f46e5;
+  color: #ffffff;
   font-weight: 600;
   padding: 0.75rem 1.25rem;
   width: 100%;
@@ -126,11 +145,13 @@
   transform: scale(1.03);
 }
 
-/* MODAL */
+/* ================================
+    Modal
+================================ */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0,0,0,0.6);
   z-index: 999;
   display: flex;
   justify-content: center;
@@ -139,10 +160,10 @@
 
 .modal-content {
   position: relative;
-  background-color: var(--color-white);
+  background-color: #ffffff;
   padding: 2rem;
   border-radius: 1rem;
-  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 30px rgba(0,0,0,0.15);
   width: 90%;
   max-width: 400px;
   text-align: center;
@@ -161,26 +182,26 @@
   background: none;
   border: none;
   font-size: 1.5rem;
-  color: var(--color-gray);
+  color: #6b7280;
   cursor: pointer;
 }
 
 .modal-title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--color-dark);
+  color: #111827;
   margin-top: 1rem;
 }
 
 .modal-body {
   margin: 1rem 0;
-  color: var(--color-gray);
+  color: #6b7280;
   font-size: 1rem;
 }
 
 .modal-login-button {
-  background-color: var(--color-accent);
-  color: var(--color-white);
+  background-color: #4f46e5;
+  color: #ffffff;
   padding: 0.75rem 1rem;
   width: 100%;
   border: none;
@@ -194,14 +215,15 @@
   background-color: #4338ca;
 }
 
-
-/* Botão Voltar no topo */
+/* ================================
+    Botão Voltar
+================================ */
 .btn-back {
   display: block;
-  margin: 25px auto 0 auto; /* 🔹 Centraliza e adiciona espaçamento superior */
+  margin: 25px auto 0 auto;
   padding: 10px 20px;
   background-color: transparent;
-  color: #444;
+  color: #444444;
   border: 2px solid #89c2d9;
   border-radius: 8px;
   font-size: 0.95rem;
@@ -212,6 +234,6 @@
 
 .btn-back:hover {
   background-color: #89c2d9;
-  color: #fff;
+  color: #ffffff;
   transform: scale(1.05);
 }

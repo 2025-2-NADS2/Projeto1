@@ -1,18 +1,19 @@
-
 import "../../style/atividades.css";
 import React, { useState } from 'react';
 
 import Overlay from "../components/overlay.jsx";
 import seta_icon from "../../assets/seta_icon.png";
 
-  const SetaIcon = () => (
-    <img
-      src={seta_icon} 
-      alt="ícone de seta"
-      className="icon-seta" 
-    />
-  );
+// Componente para mostrar o ícone da seta
+const SetaIcon = () => (
+  <img
+    src={seta_icon} 
+    alt="ícone de seta"
+    className="icon-seta" 
+  />
+);
 
+// Lista de atividades mockadas para exibir na página
 const mockActivities = [
   {
     id: 1,
@@ -48,7 +49,9 @@ const mockActivities = [
   },
 ];
 
+// Componente para renderizar cada card de atividade
 const ActivityCard = ({ activity }) => {
+  // Função para definir a classe CSS da categoria
   const getCategoryClass = (category) => {
     switch (category) {
       case "Meio Ambiente": return "category-meio-ambiente";
@@ -58,9 +61,7 @@ const ActivityCard = ({ activity }) => {
     }
   };
 
-
   return (
-    // Usa classes CSS tradicionais e o seletor :hover no CSS (definidas em atividades.css)
     <div className="activity-card">
       <div className="card-image-wrapper">
         <img
@@ -89,18 +90,22 @@ const ActivityCard = ({ activity }) => {
 
 // Componente principal da página
 const App = () => {
+  // Estado para armazenar atividades
   const [activities, setActivities] = useState(mockActivities);
-  const [showModal, setShowModal] = useState(false); // Placeholder para a futura adição de postagens (CRUD)
+  // Estado para controlar a exibição do modal
+  const [showModal, setShowModal] = useState(false);
 
+  // Abrir modal para adicionar atividade (futuro CRUD)
   const handleAddActivity = () => {
     setShowModal(true);
   };
 
+  // Fechar modal
   const closeModal = () => {
     setShowModal(false);
   };
 
-  // Ícones SVG inline para substituir lucide-react
+  // Ícones SVG inline para os pilares
   const IconHeart = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
       <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
@@ -134,14 +139,14 @@ const App = () => {
     </svg>
   );
 
-
-  // Ícones representam os 3 pilares
+  // Dados dos pilares de ação do instituto
   const Pillars = [
     { icon: <IconHeart style={{ width: '2rem', height: '2rem', color: 'white' }} />, title: "Fortalecimento de Laços", description: "Criação de redes de apoio e coesão social." },
     { icon: <IconGlobe style={{ width: '2rem', height: '2rem', color: 'white' }} />, title: "Proteção Ambiental", description: "Foco na sustentabilidade e preservação de biomas." },
     { icon: <IconZap style={{ width: '2rem', height: '2rem', color: 'white' }} />, title: "Desenvolvimento Humano Integral", description: "Promoção de educação e bem-estar físico e emocional." },
   ];
 
+  // Função para rolar até a seção de atividades
   const scrollToActivities = () => {
     const activitiesSection = document.getElementById('activities-list');
     if (activitiesSection) {
@@ -152,7 +157,7 @@ const App = () => {
   return (
     <div className="min-h-screen">
       
-      {/* 1. SEÇÃO HERO (CABEÇALHO) - Baseado na imagem fornecida */}
+      {/* SEÇÃO HERO: Cabeçalho principal da página */}
       <Overlay className="hero-section-mista">
         <div className="hero-content-mista">
           <div className="hero-image-mista"></div>
@@ -172,7 +177,7 @@ const App = () => {
         </div>
       </Overlay>
 
-      {/* 2. SEÇÃO DE PILARES */}
+      {/* SEÇÃO DE PILARES: Mostra os 3 pilares de ação */}
       <section className="pillars-section">
         <div className="pillars-section-inner max-w-7xl mx-auto">
           <h2 className="pillars-title">Nossos Pilares de Ação</h2>
@@ -190,14 +195,14 @@ const App = () => {
         </div>
       </section>
 
-      {/* 3. SEÇÃO DE LISTAGEM DE ATIVIDADES (Publicações) */}
+      {/* SEÇÃO DE LISTAGEM DE ATIVIDADES: Mostra os cards de atividades */}
       <section id="activities-list" className="activities-list-section">
         <div className="max-w-7xl mx-auto">
           <div className="activities-header">
             <h2 className="activities-main-title">
               Últimas Publicações
             </h2>
-            {/* Botão para o futuro CRUD (Adicionar Postagem) */}
+            {/* Botão para adicionar postagem (placeholder) */}
             <button
               onClick={handleAddActivity}
               className="add-post-button"
@@ -207,7 +212,7 @@ const App = () => {
             </button>
           </div>
 
-          {/* Grade de Cards de Atividades */}
+          {/* Grade de cards */}
           <div className="activities-grid">
             {activities.length > 0 ? (
               activities.map((activity) => (
@@ -222,7 +227,7 @@ const App = () => {
         </div>
       </section>
 
-      {/* 4. MODAL/Mensagem de Placeholder para o CRUD */}
+      {/* MODAL: Placeholder para futura funcionalidade CRUD */}
       {showModal && (
         <div className="modal-backdrop">
           <div className="modal-content">

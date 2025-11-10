@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Overlay from "../components/overlay.jsx";
 import "../../style/transparencia.css";
 
-import Overlay from "../components/overlay.jsx";
-
+// Dados dos relatórios
 const DADOS_RELATORIOS = [
   {
     id: 1,
@@ -33,12 +33,14 @@ const DADOS_RELATORIOS = [
   },
 ];
 
+// Componente de cada item de relatório (acordeão)
 const RelatorioItem = ({ relatorio }) => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const corClass = `relatorio-item--${relatorio.corTema}`;
 
   return (
     <div className={`relatorio-item ${corClass}`}>
+      {/* Cabeçalho clicável */}
       <div 
         className="relatorio-header" 
         onClick={() => setIsOpen(!isOpen)}
@@ -48,6 +50,7 @@ const RelatorioItem = ({ relatorio }) => {
         <span className={`relatorio-icone ${isOpen ? 'open' : ''}`}>&#x25BC;</span>
       </div>
 
+      {/* Corpo do acordeão */}
       <div className={`relatorio-body ${isOpen ? 'open' : ''}`}>
         <div className="relatorio-conteudo">
           <div className="relatorio-texto">
@@ -69,24 +72,27 @@ const RelatorioItem = ({ relatorio }) => {
   );
 };
 
+// Componente principal da página de Transparência
 const Transparencia = () => {
   return (
     <div className="pagina-transparencia">
-      {/* Banner */}
+      {/* Banner principal */}
       <Overlay className="banner-transparencia">
         <h1 className="banner-texto">
           COMPROMISSO COM A <span className="destaque">TRANSPARÊNCIA</span>
         </h1>
-        <p className="banner-subtexto">Confira nossos relatórios e resultados de forma simples e aberta.</p>
+        <p className="banner-subtexto">
+          Confira nossos relatórios e resultados de forma simples e aberta.
+        </p>
       </Overlay>
 
-      {/* Filtros */}
+      {/* Filtros (placeholder, pode ser funcional futuramente) */}
       <div className="filtros">
         <div className="filtro-item">Todos os anos</div>
         <div className="filtro-item">Todos os tipos</div>
       </div>
 
-      {/* Acordeão de Relatórios */}
+      {/* Lista de relatórios em acordeão */}
       <div className="relatorios-acordeao">
         {DADOS_RELATORIOS.map(relatorio => (
           <RelatorioItem key={relatorio.id} relatorio={relatorio} />

@@ -1,12 +1,13 @@
 import React, { useEffect, useRef } from "react";
-import "../../style/sobre.css";
 import Overlay from "../components/overlay.jsx";
+import "../../style/sobre.css";
 
+// Imagens da seção de cards
 import card_1 from "../../assets/sobre/sobre_card_1.png";
 import card_2 from "../../assets/sobre/sobre_card_2.png";
 import card_3 from "../../assets/sobre/sobre_card_3.png";
 
-// 🖼️ imagens para a seção de impacto
+// Imagens da seção de impacto
 import impacto_1 from "../../assets/sobre/sobre_info_1.png";
 import impacto_2 from "../../assets/sobre/sobre_info_2.png";
 import impacto_3 from "../../assets/sobre/sobre_info_3.png";
@@ -15,6 +16,7 @@ import impacto_4 from "../../assets/sobre/sobre_info_4.png";
 const PaginaMista = () => {
   const numberRefs = useRef([]);
 
+  // Contadores animados ao entrar em tela
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -23,9 +25,7 @@ const PaginaMista = () => {
           const finalValue = parseInt(el.dataset.value);
           if (entry.isIntersecting) {
             let current = 0;
-            const duration = 10; 
-            const stepTime = Math.max(10, duration / finalValue);
-            const step = Math.ceil(finalValue / 80); // sobe em 80 passos no total
+            const step = Math.ceil(finalValue / 80);
             const interval = setInterval(() => {
               current += step;
               if (current >= finalValue) {
@@ -35,7 +35,6 @@ const PaginaMista = () => {
               el.textContent = current.toLocaleString("pt-BR");
             }, 15);
           } else {
-            // reseta pra 0 quando sai da tela
             el.textContent = "0";
           }
         });
@@ -43,16 +42,13 @@ const PaginaMista = () => {
       { threshold: 0.5 }
     );
 
-    numberRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
-
+    numberRefs.current.forEach((ref) => ref && observer.observe(ref));
     return () => observer.disconnect();
   }, []);
 
   return (
     <div className="institucional-page-mista">
-      {/* 2. Hero Section / Banner Principal */}
+      {/* Hero / Banner principal */}
       <Overlay className="hero-section-mista">
         <div className="hero-content-mista">
           <div className="hero-image-mista"></div>
@@ -71,7 +67,7 @@ const PaginaMista = () => {
         </div>
       </Overlay>
 
-      {/* 3. Seção Sobre Nós */}
+      {/* Seção Sobre Nós */}
       <section className="sobre-nos-mista">
         <h3 className="section-subtitle-mista">Sobre Nós</h3>
         <p className="section-description-mista">
@@ -107,10 +103,10 @@ const PaginaMista = () => {
         </div>
       </section>
 
-      {/* 4. Divisor Curvo */}
+      {/* Divisor Curvo */}
       <div className="curved-divider top-curved-divider"></div>
 
-      {/* 5. Seção Nossos Valores */}
+      {/* Seção Nossos Valores */}
       <section className="valores-section-mista">
         <div className="valores-content">
           <h3 className="section-title-mista">Nossos Valores</h3>
@@ -151,10 +147,10 @@ const PaginaMista = () => {
         </div>
       </section>
 
-      {/* 6. Divisor Curvo */}
+      {/* Divisor Curvo */}
       <div className="curved-divider bottom-curved-divider"></div>
 
-      {/* 7. Seção Nosso Impacto */}
+      {/* Seção Nosso Impacto */}
       <section className="impacto-section-mista">
         <h2 className="section-title-mista">NOSSO IMPACTO</h2>
         <div className="impacto-grid-mista">

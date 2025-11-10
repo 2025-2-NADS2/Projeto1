@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import Overlay from "../components/overlay.jsx";
 import "../../style/voluntariado.css";
 
-import Overlay from "../components/overlay.jsx";
-
 export default function Volunteer() {
+  // Estado do formulário
   const [form, setForm] = useState({
     nome: "",
     email: "",
@@ -11,12 +11,15 @@ export default function Volunteer() {
     mensagem: "",
   });
 
+  // Estado de erros de validação
   const [errors, setErrors] = useState({});
 
+  // Atualiza os campos do formulário
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // Validação e envio do formulário
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -36,61 +39,63 @@ export default function Volunteer() {
 
   return (
     <div className="volunteer-page">
-      {/* HERO */}
+      {/* Hero / Banner principal */}
       <Overlay className="hero-volunteer">
         <div className="hero-content-volunteer">
           <h1>TRANSFORME VIDAS ATRAVÉS DO VOLUNTARIADO</h1>
           <p>
-            junte-se ao instituto alma e faça parte de um time dedicado a ajudar
-            pessoas em situação de vulnerabilidade. seu tempo e talento podem
+            Junte-se ao Instituto Alma e faça parte de um time dedicado a ajudar
+            pessoas em situação de vulnerabilidade. Seu tempo e talento podem
             fazer a diferença.
           </p>
         </div>
       </Overlay>
 
-      {/* FORM */}
+      {/* Formulário de candidatura */}
       <section className="form-section">
-        <h2>candidate-se agora</h2>
+        <h2>Candidate-se agora</h2>
         <p className="subtitle">
-          preencha o formulário abaixo para entrarmos em contato com você
+          Preencha o formulário abaixo para entrarmos em contato com você
         </p>
 
         <form className="volunteer-form" onSubmit={handleSubmit}>
+          {/* Linha 1: nome e email */}
           <div className="form-row">
             <div className="form-group">
-              <label>nome completo *</label>
+              <label>Nome completo *</label>
               <input
                 type="text"
                 name="nome"
                 value={form.nome}
                 onChange={handleChange}
-                placeholder="seu nome completo"
+                placeholder="Seu nome completo"
               />
               {errors.nome && <span className="error">{errors.nome}</span>}
             </div>
 
             <div className="form-group">
-              <label>email *</label>
+              <label>Email *</label>
               <input
                 type="email"
                 name="email"
                 value={form.email}
                 onChange={handleChange}
-                placeholder="seu email completo aqui"
+                placeholder="Seu email completo"
               />
               {errors.email && <span className="error">{errors.email}</span>}
             </div>
           </div>
 
+          {/* Linha 2: telefone */}
           <div className="form-row">
             <div className="form-group half">
-              <label>telefone *</label>
+              <label>Telefone *</label>
               <input
                 type="text"
                 name="telefone"
                 value={form.telefone}
                 onChange={handleChange}
-                placeholder="seu telefone completo aqui"
+                placeholder="Seu telefone completo"
               />
               {errors.telefone && (
                 <span className="error">{errors.telefone}</span>
@@ -98,13 +103,14 @@ export default function Volunteer() {
             </div>
           </div>
 
+          {/* Mensagem */}
           <div className="form-group">
-            <label>mensagem</label>
+            <label>Mensagem</label>
             <textarea
               name="mensagem"
               value={form.mensagem}
               onChange={handleChange}
-              placeholder="nos conte um pouco sobre você"
+              placeholder="Nos conte um pouco sobre você"
             />
             {errors.mensagem && (
               <span className="error">{errors.mensagem}</span>

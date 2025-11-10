@@ -6,18 +6,27 @@ import img_profileHeader from "../../assets/img_profileHeader.png";
 import "../../style/header.css"; 
 
 export default function Header({ 
-  onLoginClick, onHomeClick, onDonateClick, onProfileClick, 
-  onSobreClick, onAtividadesClick, onEventosClick, onOuvidoriaClick, onAdminClick, onVoluntarieClick
+  onLoginClick, 
+  onHomeClick, 
+  onDonateClick, 
+  onProfileClick, 
+  onSobreClick, 
+  onAtividadesClick, 
+  onEventosClick, 
+  onOuvidoriaClick, 
+  onAdminClick, 
+  onVoluntarieClick
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
+  // Função para centralizar clique em links e fechar menu
   const handleLinkClick = (callback) => {
     setMenuOpen(false);
     if (callback) callback();
   };
 
-  // 🔑 Busca dados do usuário logado
+  // 🔑 Verifica se o usuário é administrador
   useEffect(() => {
     const checkAdmin = async () => {
       const token = localStorage.getItem("token");
@@ -39,6 +48,7 @@ export default function Header({
     checkAdmin();
   }, []);
 
+  // Links principais do menu
   const links = [
     { text: "SOBRE NÓS", onClick: onSobreClick },
     { text: "TRABALHE CONOSCO", onClick: onVoluntarieClick },
@@ -47,8 +57,10 @@ export default function Header({
     { text: "OUVIDORIA", onClick: onOuvidoriaClick },
   ];
 
+  // Ícone de coração usado no botão DOAR
   const HeartIcon = () => <img src={iconHeart} alt="ícone de doação" className="icon-heart" />;
 
+  // Decide se deve abrir o perfil ou o login
   const handleProfileAccess = () => {
     const token = localStorage.getItem("token");
     if (token) handleLinkClick(onProfileClick);
@@ -59,19 +71,24 @@ export default function Header({
     <header className="header">
       <div className="container">
 
+        {/* Logo / Home */}
         <img
           className="imgAlma_header"
           src={imgAlma_header}
-          onClick={() => handleLinkClick(onHomeClick)} 
+          onClick={() => handleLinkClick(onHomeClick)}
           alt="ALMA"
           style={{ cursor: "pointer" }}
         />
 
+        {/* Menu principal */}
         <nav className={`main-nav ${menuOpen ? "open" : ""}`}>
           <ul>
             {links.map((link, i) => (
               <li key={i}>
-                <a href="#" onClick={e => { e.preventDefault(); handleLinkClick(link.onClick); }}>
+                <a 
+                  href="#" 
+                  onClick={e => { e.preventDefault(); handleLinkClick(link.onClick); }}
+                >
                   {link.text}
                 </a>
               </li>
@@ -100,10 +117,10 @@ export default function Header({
             {/* Botões Mobile */}
             <div className="header-buttons mobile-buttons">
               <button className="btn-primary" onClick={() => handleLinkClick(onDonateClick)}>
-                <HeartIcon />DOAR AGORA
+                <HeartIcon /> DOAR AGORA
               </button>
               <button className="btn-secondary" onClick={() => handleLinkClick(onLoginClick)}>
-                entrar
+                ENTRAR
               </button>
             </div>
           </ul>
@@ -112,10 +129,10 @@ export default function Header({
         {/* Botões Desktop */}
         <div className="header-buttons desktop-buttons">
           <button className="btn-primary" onClick={onDonateClick}>
-            <HeartIcon />DOAR AGORA
+            <HeartIcon /> DOAR AGORA
           </button>
           <button className="btn-secondary" onClick={onLoginClick}>
-            entrar
+            ENTRAR
           </button>
         </div>
 
@@ -128,6 +145,7 @@ export default function Header({
           style={{ cursor: "pointer" }}
         />
 
+        {/* Toggle do menu Mobile */}
         <button
           className={`menu-toggle ${menuOpen ? "open" : ""}`}
           onClick={() => setMenuOpen(!menuOpen)}

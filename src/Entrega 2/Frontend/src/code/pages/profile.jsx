@@ -3,6 +3,7 @@ import Overlay from "../components/overlay.jsx";
 import "../../style/profile.css";
 
 export default function Profile() {
+  // Estado do usuário
   const [user, setUser] = useState({
     nome: "",
     email: "",
@@ -19,7 +20,7 @@ export default function Profile() {
     }
   }, []);
 
-  // Logout
+  // Função de logout: remove token e dados do usuário
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userData");
@@ -28,9 +29,11 @@ export default function Profile() {
 
   return (
     <div className="profile-page">
+      {/* Overlay do topo da página */}
       <Overlay />
 
       <div className="profile-container">
+        {/* Cabeçalho do perfil */}
         <div className="profile-header">
           <div className="profile-avatar">
             <img
@@ -44,11 +47,13 @@ export default function Profile() {
           </div>
         </div>
 
+        {/* Corpo do perfil */}
         <div className="profile-body">
           <h3>Informações da Conta</h3>
           <p>Nome: {user.nome || "—"}</p>
           <p>Email: {user.email || "—"}</p>
 
+          {/* Ações do perfil */}
           <div className="profile-actions">
             <button className="logout-btn" onClick={handleLogout}>
               Sair da Conta

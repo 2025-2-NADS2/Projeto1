@@ -7,15 +7,19 @@
   src: url('../fonts/axiforma-light.otf') format('opentype');
 }
 
-/* ---------- Variáveis e base ---------- */
+/* ================================
+    Variáveis Gerais
+================================ */
 :root {
-  --bg: #fdf8ef;
   --card-radius: 12px;
-  --shadow-strong: 0 8px 20px rgba(0, 0, 0, 0.12);
-  --white-trans-20: rgba(255, 255, 255, 0.2);
-  --white-trans-60: rgba(255, 255, 255, 0.6);
+  --shadow-strong: 0 8px 20px rgba(0,0,0,0.12);
+  --white-trans-20: rgba(255,255,255,0.2);
+  --white-trans-60: rgba(255,255,255,0.6);
 }
 
+/* ================================
+    Reset e Base
+================================ */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -23,24 +27,28 @@
 }
 
 body {
-  background: var(--bg);
+  background: #fdf8ef;
   font-family: 'axiforma_light', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  color: #111;
+  color: #111111;
 }
 
-/* ---------- Página geral ---------- */
+/* ================================
+    Página Geral
+================================ */
 .donation-page {
   padding-top: 3.5rem;
   padding-bottom: 4.5rem;
   text-align: center;
 }
 
-/* ---------- Hero Section ---------- */
+/* ================================
+    Hero Section
+================================ */
 .hero-section {
   background: linear-gradient(135deg, #107a66, #1fa285);
-  color: white;
+  color: #ffffff;
   padding: 8rem 1rem 3.5rem;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
 }
 
 .hero-content {
@@ -51,31 +59,33 @@ body {
 
 .titulo-donate {
   font-size: 36px;
-  margin: 0 0 0.5rem;
+  margin-bottom: 0.5rem;
   line-height: 1.1;
 }
 
 .subtitulo-donate {
   font-size: 16px;
-  color: rgba(255, 255, 255, 0.95);
+  color: rgba(255,255,255,0.95);
   margin: 0 auto;
   max-width: 720px;
 }
 
-/* ---------- Meta de doação ---------- */
+/* ================================
+    Meta de Doação
+================================ */
 .goal-section {
   margin: 1.6rem auto 2rem;
-  background: #fff;
+  background: #ffffff;
   width: min(900px, 92%);
   padding: 2.4rem 2rem;
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
 }
 
 .goal-amount {
   font-size: 36px;
   color: #47bf91;
-  margin: 0 0 0.8rem;
+  margin-bottom: 0.8rem;
 }
 
 .progress-bar {
@@ -97,14 +107,16 @@ body {
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  color: #666;
+  color: #666666;
   margin-bottom: 1rem;
   flex-wrap: wrap;
   gap: 6px;
   text-align: center;
 }
 
-/* ---------- Botões ---------- */
+/* ================================
+    Botões de Doação
+================================ */
 .goal-buttons_donate {
   display: flex;
   justify-content: center;
@@ -131,19 +143,19 @@ body {
 }
 
 .btn-primary_donate {
-  background: #4F46E5;
-  color: white;
+  background: #4f46e5;
+  color: #ffffff;
 }
 
-.donation-box .btn-primary_donate:hover {
+.btn-primary_donate:hover {
   background: #5b52f0;
   transform: scale(1.07) translateY(-5px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
 }
 
 .btn-secondary_donate {
   background: #2bb673;
-  color: white;
+  color: #ffffff;
 }
 
 .btn-secondary_donate:hover {
@@ -151,52 +163,45 @@ body {
   transform: translateY(-2px);
 }
 
-/* ---------- NOVO WRAPPER PARA OS CARDS DE DOAÇÃO (NOVO) ---------- */
+/* ================================
+    Wrapper e Cards de Doação
+================================ */
 .donation-options-wrapper {
-  /* Fundo sutil para separar os cards do fundo principal da página */
-  background-color: #f7f3ed; 
+  background-color: #f7f3ed;
   padding: 4rem 1rem;
-  margin-top: -2rem; /* Puxa um pouco para cima para cobrir o espaço */
+  margin-top: -2rem;
 }
 
-/* ---------- NOVOS QUADRADOS DE DOAÇÃO (MODIFICADO) ---------- */
 .donation-options {
   display: flex;
   justify-content: center;
-  /* Altera para stretch para que todos os itens tenham a mesma altura */
-  align-items: stretch; 
+  align-items: stretch;
   gap: 2rem;
-  /* Margens ajustadas para 0, pois estão no wrapper */
-  margin: 0 auto; 
+  margin: 0 auto;
   flex-wrap: wrap;
   max-width: 1200px;
   padding: 0 1rem;
 }
 
 .donation-box {
-  background-color: white;
+  background-color: #ffffff;
   border-radius: 1.5rem;
-  /* Sombra mais suave para parecer um card e não um botão flutuante */
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1); 
-  /* Adiciona uma borda sutil para definir o limite do card */
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.05);
   flex: 1 1 300px;
   max-width: 350px;
   padding: 2rem 1.5rem;
   text-align: center;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  
-  /* Ajuste para garantir a mesma altura (Flexbox para alinhamento vertical) */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 400px; 
+  min-height: 400px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .donation-box:hover {
   transform: translateY(-5px);
-  /* Sombra no hover para dar feedback visual de que é clicável */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); 
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 .donation-img-slot {
@@ -209,19 +214,19 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 0.9rem;
-  color: #999;
+  color: #999999;
 }
 
 .donation-title {
   font-family: 'axiforma_semibold';
   font-size: 1.3rem;
   margin-bottom: 0.5rem;
-  color: #222;
+  color: #222222;
 }
 
 .donation-desc {
   font-family: 'axiforma_light';
-  color: #555;
+  color: #555555;
   font-size: 0.95rem;
   margin-bottom: 1.5rem;
   line-height: 1.4;
@@ -235,19 +240,21 @@ body {
   border: none;
   cursor: pointer;
   transition: background-color 0.2s;
-  margin-top: auto; /* Garante que o botão fique na parte inferior */
+  margin-top: auto;
 }
 
 .donation-box .btn-primary_donate:hover {
   filter: brightness(0.95);
 }
 
-/* ---------- Cards (MODIFICADO para Responsividade e Alinhamento) ---------- */
+/* ================================
+    Cards de Categoria
+================================ */
 .categories {
   display: flex;
   gap: 2rem;
   justify-content: center;
-  align-items: stretch; /* Garante que os cards de categoria também fiquem alinhados */
+  align-items: stretch;
   margin-top: 2.4rem;
   padding: 0 1.5rem;
   flex-wrap: wrap;
@@ -256,21 +263,20 @@ body {
 .category-card {
   width: 280px;
   min-width: 260px;
-  height: auto; /* Removido o height fixo */
-  min-height: 480px; /* Nova altura mínima para cards de categoria */
+  min-height: 480px;
   border-radius: var(--card-radius);
   padding: 1.8rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: white;
+  color: #ffffff;
   box-shadow: var(--shadow-strong);
   transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
 .category-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 18px 38px rgba(0,0,0,0.14);
 }
 
 .card-top {
@@ -283,12 +289,12 @@ body {
   width: 64px;
   height: 64px;
   border-radius: 999px;
-  background: var(--white-trans-20);
+  background: rgba(255,255,255,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 0 0 64px;
-  box-shadow: inset 0 -4px 10px rgba(0, 0, 0, 0.06);
+  box-shadow: inset 0 -4px 10px rgba(0,0,0,0.06);
   overflow: hidden;
 }
 
@@ -310,7 +316,7 @@ body {
   margin-top: 1rem;
   font-size: 18px;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.95);
+  color: rgba(255,255,255,0.95);
   flex-grow: 1;
   text-align: left;
 }
@@ -323,8 +329,8 @@ body {
 
 .btn-outline {
   background: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.9);
-  color: white;
+  border: 2px solid rgba(255,255,255,0.9);
+  color: #ffffff;
   padding: 8px 14px;
   border-radius: 999px;
   font-family: 'axiforma_semibold', sans-serif;
@@ -341,7 +347,7 @@ body {
 }
 
 .btn-outline:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255,255,255,0.08);
   transform: translateY(-2px);
 }
 
@@ -349,114 +355,51 @@ body {
   transform: translateX(6px);
 }
 
-/* ---------- Cores ---------- */
+/* ================================
+    Cores dos Cards
+================================ */
 .pink { background: #d589d8; }
 .green { background: #136e50; }
 .navy { background: #1e2353; }
 
-/* ---------- RESPONSIVIDADE (AJUSTADA) ---------- */
+/* ================================
+    Responsividade
+================================ */
 
-/* Tablet médio (até 980px) */
+/* Até 980px */
 @media (max-width: 980px) {
-  .titulo-donate {
-    font-size: 30px;
-  }
-  .subtitulo-donate {
-    font-size: 15px;
-  }
-  .goal-section {
-    padding: 2rem 1.4rem;
-  }
-  /* Ajuste no wrapper */
-  .donation-options-wrapper {
-    padding: 3rem 1rem; 
-  }
-  .donation-options {
-    gap: 1.5rem;
-  }
-  .donation-box {
-    flex: 1 1 280px;
-    min-height: 380px;
-  }
-  .category-card {
-    width: 100%;
-    max-width: 480px; 
-    height: auto;
-    min-height: 320px; 
-    flex-grow: 1; 
-  }
+  .titulo-donate { font-size: 30px; }
+  .subtitulo-donate { font-size: 15px; }
+  .goal-section { padding: 2rem 1.4rem; }
+  .donation-options-wrapper { padding: 3rem 1rem; }
+  .donation-options { gap: 1.5rem; }
+  .donation-box { flex: 1 1 280px; min-height: 380px; }
+  .category-card { width: 100%; max-width: 480px; min-height: 320px; flex-grow: 1; }
 }
 
-/* Tablet pequeno (até 720px) */
+/* Até 720px */
 @media (max-width: 720px) {
-  .hero-section {
-    padding: 6rem 1rem 3rem;
-  }
-  .titulo-donate {
-    font-size: 26px;
-  }
-  .goal-info {
-    flex-direction: column;
-    gap: 4px;
-  }
-  .goal-buttons_donate {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .btn-primary_donate, .btn-secondary_donate {
-    width: 100%;
-    max-width: 280px;
-  }
-  /* Ajuste no wrapper */
-  .donation-options-wrapper {
-    padding: 2.5rem 1rem;
-  }
-  .donation-options {
-    flex-direction: column;
-    align-items: center;
-  }
-  .donation-box {
-    max-width: 85%;
-    width: 100%;
-    min-height: auto; 
-  }
-  .categories {
-    flex-direction: column; 
-    align-items: center;
-  }
-  .category-card {
-    max-width: 90%; 
-    min-height: auto; 
-  }
+  .hero-section { padding: 6rem 1rem 3rem; }
+  .titulo-donate { font-size: 26px; }
+  .goal-info { flex-direction: column; gap: 4px; }
+  .goal-buttons_donate { flex-direction: column; gap: 10px; }
+  .btn-primary_donate, .btn-secondary_donate { width: 100%; max-width: 280px; }
+  .donation-options-wrapper { padding: 2.5rem 1rem; }
+  .donation-options { flex-direction: column; align-items: center; }
+  .donation-box { max-width: 85%; width: 100%; min-height: auto; }
+  .categories { flex-direction: column; align-items: center; }
+  .category-card { max-width: 90%; min-height: auto; }
 }
 
-/* Celulares (até 480px) */
+/* Até 480px */
 @media (max-width: 480px) {
-  .titulo-donate {
-    font-size: 22px;
-    line-height: 1.2;
-  }
-  .subtitulo-donate {
-    font-size: 14px;
-    max-width: 90%;
-  }
-  .goal-section {
-    padding: 1.6rem 1rem;
-    width: 94%;
-  }
-  .goal-amount {
-    font-size: 30px;
-  }
-  .categories {
-    padding: 0 0.8rem;
-  }
-  .category-card {
-    max-width: 95%; 
-    padding: 1.2rem;
-  }
-  .donation-box {
-    max-width: 95%; 
-  }
+  .titulo-donate { font-size: 22px; line-height: 1.2; }
+  .subtitulo-donate { font-size: 14px; max-width: 90%; }
+  .goal-section { padding: 1.6rem 1rem; width: 94%; }
+  .goal-amount { font-size: 30px; }
+  .categories { padding: 0 0.8rem; }
+  .category-card { max-width: 95%; padding: 1.2rem; }
+  .donation-box { max-width: 95%; }
 }
 
 .donation-img-slot {
@@ -470,5 +413,5 @@ body {
   width: 90px;
   height: 90px;
   margin: 0 auto 1rem;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }

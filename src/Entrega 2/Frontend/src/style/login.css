@@ -174,7 +174,6 @@
   z-index: 1;
 }
 
-/* Estado normal (login visível, registro escondido) */
 .register-right {
   opacity: 0;
   position: absolute;

@@ -16,14 +16,16 @@ import img2 from "../../assets/carrossel/img2.jpg";
 import img3 from "../../assets/carrossel/img3.jpg";
 import img4 from "../../assets/carrossel/img4.jpg";
 
-// Hook do carrossel
+// Hook customizado para controlar o carrossel
 function useCarrossel(tamanho) {
   const [indice, setIndice] = useState(0);
 
+  // Vai para a imagem anterior
   const anterior = () => {
     setIndice((prev) => (prev === 0 ? tamanho - 1 : prev - 1));
   };
 
+  // Vai para a próxima imagem
   const proximo = () => {
     setIndice((prev) => (prev === tamanho - 1 ? 0 : prev + 1));
   };
@@ -31,10 +33,12 @@ function useCarrossel(tamanho) {
   return { indice, anterior, proximo, setIndice };
 }
 
+// Componente do carrossel de imagens
 function Carrossel({ imagens }) {
   const { indice, anterior, proximo } = useCarrossel(imagens.length);
   const [progresso, setProgresso] = useState(0);
 
+  // Atualiza a barra de progresso e troca a imagem automaticamente
   useEffect(() => {
     const intervalo = setInterval(() => {
       setProgresso((prev) => {
@@ -44,7 +48,7 @@ function Carrossel({ imagens }) {
         }
         return prev + 1;
       });
-    }, 100);
+    }, 100); // aumenta 1% a cada 100ms
 
     return () => clearInterval(intervalo);
   }, []);
@@ -52,12 +56,14 @@ function Carrossel({ imagens }) {
   return (
     <div className="carrossel">
       <div className="carrossel_conteudo">
+        {/* Imagem atual do carrossel */}
         <img
           src={imagens[indice]}
           alt={`Imagem ${indice + 1}`}
           style={{ width: "500px", height: "700px", objectFit: "cover" }}
           className="carrossel_interior"
         />
+        {/* Barra de progresso */}
         <div className="progressbar">
           <div
             className="progressbar-fill"
@@ -66,15 +72,17 @@ function Carrossel({ imagens }) {
         </div>
       </div>
 
+      {/* Botões de navegação */}
       <div className="botoes">
         <button className="botao_carrossel_1" onClick={anterior}>
-          <img src={carossel_left} alt="ALMA" />
+          <img src={carossel_left} alt="Anterior" />
         </button>
         <button className="botao_carrossel_2" onClick={proximo}>
-          <img src={carossel_right} alt="ALMA" />
+          <img src={carossel_right} alt="Próximo" />
         </button>
       </div>
 
+      {/* Indicadores do carrossel */}
       <div className="carrossel-indicadores-background">
         <div className="carrossel-indicadores">
           {imagens.map((_, i) => (
@@ -89,14 +97,14 @@ function Carrossel({ imagens }) {
   );
 }
 
-// App principal
+// Componente principal da página inicial
 export default function App() {
   const imagens = [img1, img2, img3, img4];
 
   const startFormatRef = useRef(null);
   const [alturaOverlay, setAlturaOverlay] = useState(0);
 
-  // Atualiza altura do overlay conforme start_format
+  // Atualiza a altura do overlay baseado na altura da imagem start_format
   const atualizarAltura = () => {
     if (startFormatRef.current) {
       const altura = startFormatRef.current.offsetHeight;
@@ -112,7 +120,7 @@ export default function App() {
 
   return (
     <div className="app">
-      {/* Introdução */}
+      {/* Seção inicial com efeito de overlay */}
       <Overlay className="overlayHomepage" style={{ height: `${alturaOverlay}px` }}>
         <section
           className="section-com-fundo"
@@ -120,17 +128,22 @@ export default function App() {
           alt="Background Effect"
         >
           <section className="intro-effect"></section>
+
+          {/* Imagem de background decorativa */}
           <img
             ref={startFormatRef}
             className="start_format"
             src={start_format}
             alt="Background Shape"
           />
+
           <div className="conteudo">
-            {/* Carrossel */}
+            {/* Lado esquerdo com carrossel */}
             <div className="inicio_esquerda">
               <Carrossel imagens={imagens} />
             </div>
+
+            {/* Lado direito com informações do Instituto */}
             <div className="inicio_direita">
               <div className="intro-right">
                 <h2 className="titulo-instituto">
@@ -157,7 +170,7 @@ export default function App() {
         </section>
       </Overlay>
 
-      {/* Destaques */}
+      {/* Seção de destaques com background */}
       <section
         className="destaques"
         style={{ backgroundImage: `url(${destaques_format})` }}
@@ -172,10 +185,10 @@ export default function App() {
         <button className="btn-primary btn-more">mais...</button>
       </section>
 
-      {/* Área Verde Escura */}
+      {/* Seção de patrocinadores */}
       <Patrocinadores />
 
-      {/* Quem Fez */}
+      {/* Seção "Quem Fez Acontecer" */}
       <section className="quem-fez">
         <h4>QUEM FEZ</h4>
         <h3>ACONTECER</h3>

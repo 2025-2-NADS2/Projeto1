@@ -4,12 +4,13 @@ import Overlay from "../components/overlay.jsx";
 import api from "../../services/api.js";
 
 export default function Login() {
+  // Estado que controla se o painel de registro está ativo
   const [isRegister, setIsRegister] = useState(false);
 
-  // Campos de login
+  // Dados do formulário de login
   const [loginData, setLoginData] = useState({ email: "", senha: "" });
 
-  // Campos de registro
+  // Dados do formulário de registro
   const [registerData, setRegisterData] = useState({
     nome: "",
     email: "",
@@ -18,9 +19,10 @@ export default function Login() {
     confirmarSenha: ""
   });
 
+  // Alterna entre Login e Registro
   const togglePanel = () => setIsRegister(!isRegister);
 
-  // Função de registro
+  // Função para registrar usuário
   const handleRegister = async () => {
     try {
       const body = {
@@ -36,6 +38,8 @@ export default function Login() {
       const response = await api.post("/usuario/post/cadastro/usuario", body);
       alert("Conta criada com sucesso! Faça login.");
       console.log("✅ Cadastro:", response.data);
+
+      // Volta para o painel de login após registro
       setIsRegister(false);
     } catch (error) {
       console.error("Erro ao registrar:", error);
@@ -43,7 +47,7 @@ export default function Login() {
     }
   };
 
-  // Função de login
+  // Função para login de usuário
   const handleLogin = async () => {
     try {
       const response = await api.post("/usuario/login", {
@@ -53,21 +57,22 @@ export default function Login() {
 
       const token = response.data.token;
 
-      // Decodifica o token para pegar email e nome
+      // Decodifica o token para pegar informações do usuário
       const base64Payload = token.split('.')[1];
       const payload = JSON.parse(atob(base64Payload));
 
       const userData = {
-        id: payload.nameid, // Claim NameIdentifier
-        nome: payload.Nome, // Claim customizada que você criou
+        id: payload.nameid,   // Claim NameIdentifier
+        nome: payload.Nome,   // Claim personalizada
         email: payload.email
       };
 
+      // Salva token e dados do usuário no localStorage
       localStorage.setItem("token", token);
       localStorage.setItem("userData", JSON.stringify(userData));
 
       alert("Login realizado com sucesso!");
-      window.location.href = "/profile";
+      window.location.href = "/profile"; // Redireciona para o perfil
     } catch (error) {
       console.error("Erro no login:", error);
       alert("Email ou senha incorretos.");
@@ -76,9 +81,12 @@ export default function Login() {
 
   return (
     <div className="login-page">
+      {/* Overlay superior decorativo */}
       <Overlay className="topLogin" />
 
+      {/* Container principal do login/registro */}
       <div className={`login-frame ${isRegister ? "show-register" : ""}`}>
+        
         {/* Seção de Login */}
         <div className="form-left-side">
           <div className="form-side login-left">
@@ -159,7 +167,7 @@ export default function Login() {
           </button>
         </div>
 
-        {/* Painel verde animado */}
+        {/* Painel verde animado de alternância */}
         <div className="login-right">
           <h2>{isRegister ? "Bem vindo(a) de Volta!" : "Novo por aqui?"}</h2>
           <p>

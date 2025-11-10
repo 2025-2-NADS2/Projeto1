@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../style/donatePortal.css";
 import Overlay from "../components/overlay.jsx";
 
-// Ícone SVG
+// Ícone SVG para o card de doação
 const IconCard = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -21,15 +21,19 @@ const IconCard = (props) => (
   </svg>
 );
 
+// Componente do portal de doação
 const DonationPortal = ({ onBack, onLoginClick }) => {
+  // Estados para armazenar valor e método de pagamento
   const [donationValue, setDonationValue] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
+  // Estado para verificar se usuário está logado
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // Estado para mostrar popup de login
   const [showLoginPopup, setShowLoginPopup] = useState(false);
 
-  // Verifica se há token no localStorage quando o componente é montado
+  // Verifica se há token no localStorage ao montar o componente
   useEffect(() => {
-    const token = localStorage.getItem("token"); // altere o nome se o seu for diferente
+    const token = localStorage.getItem("token"); // alterar se o nome do token for diferente
     if (token) {
       setIsLoggedIn(true);
     } else {
@@ -37,9 +41,11 @@ const DonationPortal = ({ onBack, onLoginClick }) => {
     }
   }, []);
 
+  // Função para processar a doação
   const handleDonate = (e) => {
     e.preventDefault();
 
+    // Se não estiver logado, mostra popup de login
     if (!isLoggedIn) {
       setShowLoginPopup(true);
       return;
@@ -51,17 +57,19 @@ const DonationPortal = ({ onBack, onLoginClick }) => {
       metodo: paymentMethod,
     });
 
+    // Mensagem de confirmação
     alert(
       `✅ Doação de R$${donationValue} via ${paymentMethod.toUpperCase()} realizada com sucesso!`
     );
 
-    // Limpa o formulário após o sucesso
+    // Limpa os campos do formulário
     setDonationValue("");
     setPaymentMethod("");
   };
 
   return (
     <div className="donation-container">
+      {/* SEÇÃO HERO: Cabeçalho principal */}
       <Overlay className="hero-section-doacao">
         <div className="hero-content-doacao">
           <h1>Portal do Doador 💚</h1>
@@ -69,6 +77,7 @@ const DonationPortal = ({ onBack, onLoginClick }) => {
         </div>
       </Overlay>
 
+      {/* FORMULÁRIO DE DOAÇÃO */}
       <section className="donation-form-section">
         <div className="donation-card">
           <div className="donation-header">
@@ -108,13 +117,14 @@ const DonationPortal = ({ onBack, onLoginClick }) => {
             </button>
           </form>
 
+          {/* Botão para voltar */}
           <button className="btn-back" onClick={onBack}>
             ← Voltar
           </button>
         </div>
       </section>
 
-      {/* POPUP DE LOGIN */}
+      {/* POPUP DE LOGIN: Aparece se usuário tentar doar sem estar logado */}
       {showLoginPopup && (
         <div className="modal-backdrop">
           <div className="modal-content">
