@@ -1,0 +1,44 @@
+.overlay-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* camada do bitmap */
+.bitmap-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("../assets/overlay/bitmap.png");
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: color-burn;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 3;
+  image-rendering: pixelated;
+}
+
+/* asteriscos */
+.asterisco-img {
+  opacity: 0.1;
+  pointer-events: none;
+  animation: fadeInOut 10s ease-in-out forwards;
+  transform-origin: center center;
+  z-index: 0;
+  image-rendering: pixelated;
+}
+
+/* asteriscos */
+.asterisco-img {
+  pointer-events: none;
+  animation: fadeInOut 10s ease-in-out forwards, spin 6s linear infinite;
+  transform-origin: center center;
+  z-index: 0;
+  image-rendering: pixelated;
+}
+
+/* rotação contínua */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(180deg); }
+  100% { transform: rotate(360deg); }
+}

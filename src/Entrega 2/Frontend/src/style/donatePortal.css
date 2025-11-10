@@ -1,0 +1,217 @@
+:root {
+  --color-primary: #1e5e6e;
+  --color-primary-dark: #0f4f48;
+  --color-accent: #4f46e5;
+  --color-bg: #f9fafb;
+  --color-white: #ffffff;
+  --color-gray: #6b7280;
+  --color-gray-light: #f3f4f6;
+  --color-dark: #111827;
+}
+
+.donation-container {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+}
+
+/* HERO */
+.hero-section-doacao {
+  top: 5rem;
+  background: var(--overlay);
+  color: var(--color-white);
+  text-align: center;
+  padding: 5rem 1rem;
+}
+
+.hero-content-doacao h1 {
+  font-size: 2.75rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.hero-content-doacao p {
+  font-size: 1.25rem;
+  opacity: 0.9;
+}
+
+/* FORM SECTION */
+.donation-form-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 1rem;
+}
+
+.donation-card {
+  position: relative;
+  margin-top: 2rem; 
+  background-color: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 380px;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.donation-card:hover {
+  transform: translateY(-4px);
+}
+
+.donation-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.icon-box {
+  width: 50px;
+  height: 50px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 0.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.donation-header h2 {
+  font-size: 1.5rem;
+  color: var(--color-dark);
+  font-weight: 700;
+}
+
+.donation-form label {
+  display: block;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 0.5rem;
+}
+
+.donation-form input,
+.donation-form select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-gray-light);
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  background: var(--color-bg);
+  transition: all 0.2s;
+}
+
+.donation-form input:focus,
+.donation-form select:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(30, 94, 110, 0.2);
+}
+
+.donate-btn {
+  background: var(--color-accent);
+  color: var(--color-white);
+  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+  width: 100%;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.donate-btn:hover {
+  background: #4338ca;
+  transform: scale(1.03);
+}
+
+/* MODAL */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  position: relative;
+  background-color: var(--color-white);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  animation: popupFade 0.3s ease-out;
+}
+
+@keyframes popupFade {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--color-gray);
+  cursor: pointer;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-dark);
+  margin-top: 1rem;
+}
+
+.modal-body {
+  margin: 1rem 0;
+  color: var(--color-gray);
+  font-size: 1rem;
+}
+
+.modal-login-button {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  padding: 0.75rem 1rem;
+  width: 100%;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal-login-button:hover {
+  background-color: #4338ca;
+}
+
+
+/* Botão Voltar no topo */
+.btn-back {
+  display: block;
+  margin: 25px auto 0 auto; /* 🔹 Centraliza e adiciona espaçamento superior */
+  padding: 10px 20px;
+  background-color: transparent;
+  color: #444;
+  border: 2px solid #89c2d9;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+  background-color: #89c2d9;
+  color: #fff;
+  transform: scale(1.05);
+}

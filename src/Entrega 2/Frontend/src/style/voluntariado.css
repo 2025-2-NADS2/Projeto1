@@ -1,0 +1,183 @@
+@font-face {
+  font-family: 'axiforma_semibold';
+  src: url('../fonts/axiforma-semi-bold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'axiforma_light';
+  src: url('../fonts/axiforma-light.otf') format('opentype');
+}
+
+:root {
+  --bg: #fdf8ef;
+  --green: #004d45;
+  --accent: #107a66;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'axiforma_light', sans-serif; /* Fonte padrão */
+}
+
+body {
+  background: var(--bg);
+  color: #111;
+  padding-top: 5rem; /* Para não ficar atrás do header */
+}
+
+.volunteer-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: 'axiforma_light';
+}
+
+/* ---------- HERO ---------- */
+.hero-volunteer {
+  background: linear-gradient(135deg, #107a66, #1fa285);
+  color: #fff;
+  padding: 6rem 1rem 3.5rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  font-family: 'axiforma_light';
+}
+
+.hero-content-volunteer {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.hero-content-volunteer h1 {
+  font-family: 'axiforma_semibold';
+  font-size: 28px;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero-content-volunteer p {
+  font-size: 15px;
+  opacity: 0.9;
+  line-height: 1.5;
+  font-family: 'axiforma_light';
+}
+
+/* ---------- FORM SECTION ---------- */
+.form-section {
+  background: var(--bg);
+  padding: 3.5rem 1rem 6rem;
+  width: 100%;
+  max-width: 880px;
+  font-family: 'axiforma_light';
+}
+
+.form-section h2 {
+  font-family: 'axiforma_semibold';
+  font-size: 22px;
+  text-transform: lowercase;
+  margin-bottom: 0.4rem;
+}
+
+.form-section .subtitle {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.volunteer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-family: 'axiforma_light';
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #333;
+  font-family: 'axiforma_light';
+}
+
+.form-group input,
+.form-group textarea {
+  border: 1.4px solid #ccc;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 15px;
+  outline: none;
+  background: white;
+  font-family: 'axiforma_light';
+}
+
+.form-group textarea {
+  resize: none;
+  height: 110px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--accent);
+}
+
+/* ---------- ERROS ---------- */
+.error {
+  font-size: 13px;
+  color: #e63946;
+  margin-top: 4px;
+  font-family: 'axiforma_light';
+}
+
+/* ---------- BOTÃO ---------- */
+.btn-enviar {
+  background: var(--green);
+  color: #fff;
+  font-family: 'axiforma_semibold';
+  font-size: 15px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.btn-enviar:hover {
+  background: #006b5e;
+  transform: translateY(-2px);
+}
+
+/* ---------- FOOTER ---------- */
+.volunteer-footer {
+  width: 100%;
+  background: var(--green);
+  color: #fff;
+  text-align: center;
+  padding: 1.4rem 0;
+  font-size: 13px;
+  margin-top: auto;
+  font-family: 'axiforma_light';
+}
+
+/* ---------- RESPONSIVIDADE ---------- */
+@media (max-width: 720px) {
+  .hero-content-volunteer h1 {
+    font-size: 24px;
+  }
+  .form-row {
+    flex-direction: column;
+  }
+}

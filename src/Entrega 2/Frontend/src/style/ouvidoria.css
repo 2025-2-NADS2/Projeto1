@@ -1,0 +1,171 @@
+.ouvidoria-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: linear-gradient(to bottom right, #fffdee, #fff3f8);
+  padding: 5rem 1rem 3rem; /* 5rem abaixo do header fixo */
+  box-sizing: border-box;
+}
+
+.ouvidoria-box {
+  background: #ffffff;
+  width: 100%;
+  max-width: 650px;
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  padding: 2.5rem 3rem;
+  box-sizing: border-box;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header */
+.ouvidoria-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.ouvidoria-header h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.title-group svg {
+  color: #00916e;
+}
+
+.close-icon {
+  color: #555;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.close-icon:hover {
+  color: #e74c3c;
+}
+
+/* Descrição */
+.ouvidoria-desc {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 1.8rem;
+  line-height: 1.5;
+}
+
+/* Formulário */
+.ouvidoria-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ouvidoria-form input,
+.ouvidoria-form textarea {
+  width: 100%;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  background-color: #fafafa;
+  transition: 0.25s;
+}
+
+.ouvidoria-form input:focus,
+.ouvidoria-form textarea:focus {
+  border-color: #00916e;
+  background-color: #fff;
+  box-shadow: 0 0 0 2px rgba(0, 145, 110, 0.2);
+  outline: none;
+}
+
+.ouvidoria-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Aceite de privacidade */
+.privacidade {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: #444;
+  margin-top: 0.5rem;
+}
+
+.privacidade input {
+  margin-top: 3px;
+  width: 16px;
+  accent-color: #00916e;
+}
+
+.privacidade a {
+  color: #00916e;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.privacidade a:hover {
+  text-decoration: underline;
+}
+
+/* Status */
+.status {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+  background-color: #f4f4f4;
+  border-radius: 6px;
+  padding: 0.6rem 0.8rem;
+}
+
+/* Botão */
+.ouvidoria-form button {
+  align-self: flex-end;
+  margin-top: 0.8rem;
+  background-color: #00916e;
+  color: #fff;
+  border: none;
+  padding: 0.9rem 2rem;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.ouvidoria-form button:hover:not(:disabled) {
+  background-color: #007b5b;
+  transform: translateY(-1px);
+}
+
+.ouvidoria-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsivo */
+@media (max-width: 480px) {
+  .ouvidoria-box {
+    padding: 2rem 1.5rem;
+  }
+  .ouvidoria-header h2 {
+    font-size: 1.5rem;
+  }
+}
