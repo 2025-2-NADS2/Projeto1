@@ -15,7 +15,7 @@ const Eventos = () => {
   const [eventoSelecionado, setEventoSelecionado] = useState(null);
 
   // URL da API de eventos
-  const EVENTOS_API_URL = 'http://localhost:5000/api/evento/get/eventos';
+  const EVENTOS_API_URL = 'http://localhost:5257/api/evento/get/eventos';
 
   // Busca os eventos do backend quando o componente é montado
   useEffect(() => {

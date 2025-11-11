@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../../style/donatePortal.css";
 import Overlay from "../components/overlay.jsx";
+import PixPopup from "../pagamento/pixPopup.jsx";
+import gerarPix from "../pagamento/pix.jsx"; // 🔹 Importa a função geradora do Pix
 
 // Ícone SVG para o card de doação
 const IconCard = (props) => (
@@ -23,53 +25,54 @@ const IconCard = (props) => (
 
 // Componente do portal de doação
 const DonationPortal = ({ onBack, onLoginClick }) => {
-  // Estados para armazenar valor e método de pagamento
   const [donationValue, setDonationValue] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
-  // Estado para verificar se usuário está logado
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // Estado para mostrar popup de login
   const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const [pixData, setPixData] = useState(null); // Dados do Pix
 
-  // Verifica se há token no localStorage ao montar o componente
   useEffect(() => {
-    const token = localStorage.getItem("token"); // alterar se o nome do token for diferente
-    if (token) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
   }, []);
 
-  // Função para processar a doação
   const handleDonate = (e) => {
     e.preventDefault();
 
-    // Se não estiver logado, mostra popup de login
-    if (!isLoggedIn) {
-      setShowLoginPopup(true);
+    // if (!isLoggedIn) {
+    //   setShowLoginPopup(true);
+    //   return;
+    // }
+
+    if (paymentMethod === "pix") {
+      if (!donationValue || parseFloat(donationValue) <= 0) {
+        alert("Digite um valor válido para gerar o Pix.");
+        return;
+      }
+
+      const pixGerado = gerarPix(parseFloat(donationValue));
+
+      if (!pixGerado) {
+        alert("Erro ao gerar o Pix. Verifique o valor informado.");
+        return;
+      }
+
+      setPixData(pixGerado);
       return;
     }
 
-    // Simulação de sucesso da doação (futuramente substituir pela API real)
-    console.log("Processando doação:", {
-      valor: donationValue,
-      metodo: paymentMethod,
-    });
-
-    // Mensagem de confirmação
+    // Outros métodos de pagamento simulados
     alert(
       `✅ Doação de R$${donationValue} via ${paymentMethod.toUpperCase()} realizada com sucesso!`
     );
 
-    // Limpa os campos do formulário
     setDonationValue("");
     setPaymentMethod("");
   };
 
   return (
     <div className="donation-container">
-      {/* SEÇÃO HERO: Cabeçalho principal */}
+      {/* SEÇÃO HERO */}
       <Overlay className="hero-section-doacao">
         <div className="hero-content-doacao">
           <h1>Portal do Doador 💚</h1>
@@ -77,7 +80,7 @@ const DonationPortal = ({ onBack, onLoginClick }) => {
         </div>
       </Overlay>
 
-      {/* FORMULÁRIO DE DOAÇÃO */}
+      {/* FORMULÁRIO */}
       <section className="donation-form-section">
         <div className="donation-card">
           <div className="donation-header">
@@ -117,14 +120,17 @@ const DonationPortal = ({ onBack, onLoginClick }) => {
             </button>
           </form>
 
-          {/* Botão para voltar */}
+          {/* Botão Voltar */}
           <button className="btn-back" onClick={onBack}>
             ← Voltar
           </button>
         </div>
       </section>
 
-      {/* POPUP DE LOGIN: Aparece se usuário tentar doar sem estar logado */}
+      {/* POPUP DO PIX */}
+      {pixData && <PixPopup pixData={pixData} onClose={() => setPixData(null)} />}
+
+      {/* POPUP DE LOGIN */}
       {showLoginPopup && (
         <div className="modal-backdrop">
           <div className="modal-content">
